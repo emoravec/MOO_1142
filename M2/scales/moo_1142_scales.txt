@@ -1,0 +1,12 @@
+moo_1142_snr_pt_source_sub.fits
+-3 sigma contours
+	major axis, 123"
+	minor axis, 96"
+
+-5 sigma contours
+	major axis, 97"
+	minor axis, 69"
+
+moo1142_ggm.5.fits with contours at 2,3,5,10 sigma where sigma=0.06
+shock of order 72"
+just eyeballing 79"
