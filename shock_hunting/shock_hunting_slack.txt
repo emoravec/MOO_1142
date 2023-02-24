@@ -1,0 +1,40 @@
+Shock Hunting
+
+Dec 27th, 2022
+Craig L. Sarazin
+  12:53 PM
+Here are my results of hunting for shocks or other features in the XMM X-ray image.   For those new to XMM,  it has 3 X-ray telescopes and 3 X-ray imagers, MOS1, MOS2, and pn.  Everything I show is the result of combining the three images, each corrected for background and exposure.  First, I show the adaptively smoothed image, which I distributed last spring and more recently.
+adapt-400-7200.jpg
+I tried unsharp masking, but was unable to get anything reliable out of this.   The issue is that the outer parts of the cluster are faint, the cluster is small, and the inner parts are bright.  In unsharp masking, you smooth the image with a small kernal ~ to the PSF, and then a 5-20 x bigger kernel, and then subtract the two.  Unfortunately, the outer portions of the large smoothing of the inner cluster bury the outer parts of the cluster.
+1:07
+So, I tried the GGM method.  This worked better.  I used a sigma = 5" gaussian derivative.  The resulting GGM image is 
+ggm.jpg
+To my eye, the clearest outer structure is hyperbolic structure running from SSW to NNW, and corresponding to the inner SB jump seen in the XMM SB profile distributed earlier.  My by-eye region for this is shown below:
+ggm_inner.jpg
+Tony’s region for the outer shock is shown next on the same GGM image.
+ggm_outer_tony.jpg
+This is less obvious.  One concern I had with this region is that the apex of the shock = semimajor axis of the region is due W, but this is also the edge of the region.  One might expect a shock to be ~ symmetrical about the apex, not end at it.  There is similar, extended stuff on the NW side of the cluster, so it might make sense to extend the region over there.   The next image shows this region.
+ggm_outer_big.jpg
+
+
+Luca - Do the coordinates match (more or less) with the putative shock in the figure from Emily’s proposal (attached)?
+Image from iOS
+
+Craig - Yes, at least close enough by eye.   My region is probably a bit further W, but it is a bit subjective where one draws the curve.  I will tar up the images and region files and send them out.  Someone might send me the fits file of the SZ GGM image, or even better, both the data and the GGM images.  Also, what was the sigma of the gaussian whose derivative was used for the SZ GGM?
+
+Luca - Here it is.
+I will double check this tomorrow morning (sorry, still a bit in the italian christmas mood), but the kernel size should be set to 5 pixels, for a pixel scale of 1".
+moo1142_ggm.5.fits
+
+December 28th, 2022
+EM: With the help of Craig and discussion here, I have completed the preliminary unsharp masking analysis of the M2 image. I smoothed the image with a gaussian sigma = 5" (~sigma of a 9-10" FWHM of M2). Then chose a few more scales 25", 50", and 100" (5,10,20 x PSF). And did the following subtraction: large_scale_smoothed_image -smoothed_to_M2_beam_image . Attached are the results. The first from left to right top to bottom - original point source subtracted map, smoothed with sigma=5", smoothed with sigma=25pix - smoothed with sigma=25pix, and smoothed with sigma=50pix - smoothed with sigma=25pix, And the second is a compilation of the three subtractions labeled in the image. I don’t see a whole lot of structure coming out.
+MOO_1142_orig_unsharp_masking_25_50pix.png
+MOO_1142_unsharp_masking_25_50_100pix.png
+
+December 29th, 2022
+Craig - This answers a question Luca asked yesterday.   How do the XMM and Chandra “shocks” match up with the shock seen in MUSTANG-2 GGM.  The thin green regions are the inner discontinuity and outer shock based on the XMM GGM.  The thick wedge is Tony’s region for the shock from Chandra, I believe.  The image is Luca’s M2 GGM.  So, general agreement, but not in detail.
+m2_ggm_shocks.jpg
+outer_shock_Tony.reg
+Tony - The region I used was just kind of by eye and when chatting with 
+@Luca Di Mascolo
+, so part of what we should do now is to refine the region used for Chandra analysis too. It's possible the agreement is much better.
