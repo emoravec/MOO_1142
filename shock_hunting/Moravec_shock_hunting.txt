@@ -1,0 +1,23 @@
+Shock Hunting Moravec March 3rd, 2023
+
+GGM - does gradient of surface brightness. The peaks of the surface brightness distribution are zero.
+
+Goal: to define a region that contains a maximum in the gradient filter in M2, Xmm, and Chandra. To make a region that is informed by all of the images. Shocks will be a discontinuity in the gradient. 
+
+M2 -> Luca's GGM 5 (sharper) or 6 (a bit fuzzier)
+Chandra -> GGM 3 - 5
+XMM -> 2 or 3 (moo1142_xmm.combNetCenter.ggm.2.fits or moo_1142.combObj.ggm.2.fits)
+XMM Craig -> XMM_ggm_2_sarazin.fits
+
+DS9 -> craig recommended using sqrt + min/max and for the XMM with min=2E-7 and max=1.2E-5
+M2 (5) -> linear + min/max
+
+Compared all of these and made some thin and thick regions for both left and right. 
+
+Compared M2 GGM = 5, XMM GGM=2, Chandra GGM=3 and 4
+
+MOO_1142_right_shock_regions.png -> made a region that empasses a) just the discontinuity which I assume is the shock (Moravec_M2_ggm5_left_thin_conserv.reg) and b) the entire area of interest (Moravec_M2_ggm_right_largest.reg or Moravec_M2_ggm5_right_thick_medium.reg)
+MOO_1142_left_shock_regions_all.png -> made a region that empasseses a) just the discontinuity (Moravec_M2_ggm5_right_thin_conserv.reg) and b) the entire area of interest (Moravec_M2_ggm5_left_thick_medium.reg)
+MOO_1142_left_shock_regions_only_M2.png -> realized that the M2 thin regions that encompass only the shock, the outer edges tend to lie right where Chandra GGM stops so good to view without the regions?
+
+Questions: what do we want to encompass?

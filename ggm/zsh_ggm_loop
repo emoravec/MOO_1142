@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+for i in $(seq 1 5); do
+    python ./gaussian_gradient_magnitude.py /Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/xray/images/XMM/XMM_comb-net-center.fits /Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/ggm/XMM/sanders/moo1142_xmm.CombNetIm.sanders.ggm.$i.fits $i
+done
