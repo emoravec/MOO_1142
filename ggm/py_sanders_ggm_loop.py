@@ -10,6 +10,6 @@ for kernel in range(1, 6):
     run_sanders_ggm(infile=mooNetCenter,
                     outfile=location+'ggm/XMM/sanders/moo1142_xxm.combNetCenter.sanders.ggm.{0}.fits'.format(kernel),
                     scale=kernel)
-    run_sanders_ggm(infile=mooObj,
-                    outfile=location+'ggm/XMM/sanders/moo1142_xxm.combObj.sanders.ggm.{0}.fits'.format(kernel),
-                    scale=kernel)
+    # run_sanders_ggm(infile=mooObj,
+    #                 outfile=location+'ggm/XMM/sanders/moo1142_xxm.combObj.sanders.ggm.{0}.fits'.format(kernel),
+    #                 scale=kernel)

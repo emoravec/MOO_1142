@@ -41,7 +41,8 @@ for kernel in range(1,6):
 
   newhdu = fits.PrimaryHDU(newggm,moohdu[0].header)
   #newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combNetIm.ggm.{0}.fits'.format(kernel),overwrite=True)
-  newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combObj.ggm.{0}.fits'.format(kernel),overwrite=True)
+  newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combNetCenter.ggm.{0}.fits'.format(kernel),overwrite=True)
+  #newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combObj.ggm.{0}.fits'.format(kernel),overwrite=True)
   #newhdu.writeto(location+'ggm/Chandra/moo1142_chandra_ggm.{0}.fits'.format(kernel),overwrite=True)
 
   newmin = np.nanmin(newhdu.data) if mspan else -np.nanmax(np.abs(newhdu.data))
@@ -56,7 +57,8 @@ for kernel in range(1,6):
   newimg.ticks.set_color('black')
 
   #plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetIm.ggm.{0}.pdf'.format(kernel))
-  plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetObj.ggm.{0}.pdf'.format(kernel))
+  plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetCenter.ggm.{0}.pdf'.format(kernel))
+ # plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetObj.ggm.{0}.pdf'.format(kernel))
   #plt.savefig(location+'ggm/Chandra/pdf/moo1142_chandra_ggm.{0}.pdf'.format(kernel))
 
   plt.close()
