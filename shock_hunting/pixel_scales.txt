@@ -1,0 +1,5 @@
+Pixel scale of images
+
+XMM - 6.94444444444445E-04* 3600 = 2.5" per pixel
+M2 - 0.00027777777777778 * 3600 = 1" per pixel
+Chandra - 5.4666666666668E-04 * 3600 = 1.97" per pixel

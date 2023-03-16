@@ -27,13 +27,29 @@ Slack conversation over the weekend and March 6th, 2023
 From Tony:
 * I would expand the comparison to include the input (non-GGM) MUSTANG-2 image.
 * I would also check out GGM1 for XMM (it’s already smoothed by the PSF) as well as smaller numbers for M2
-* Use a linear scale for the MUSTANG-2 image
+* Use a linear scale for the MUSTANG-2 image - I use that already
 * try log for the x-ray and see how it looks 
 
 XMM_comb-net-centered.fits - now correct image with centeredd and 0s for masked areas. 
 XMM_comb-net-centered_incorrect.fits - original file that had nans for masked areas.
 
-Pixelscale for M2 and XMM images.
-
 From Craig about how to set a region for the shock: An elliptical pie wedge, where the curved part fits the shape and location of the shock, and the sides indicate its angular width.  (How far does the shock extend on either side of the apex?)
 From Tony: Yeah, it should be a whole sector including the angle subtended by the shock, with a start inside the cluster and an ending out at some preshock radius
+
+Compare:
+* non-GGM MUSTANG-2 image
+	* self-cal and non self-cal
+* M2
+	* Moravec chose GGM 5
+	* Tony says to check smaller numbers - yes I did that but can show the comparison with 3.
+	* use linear scale
+* XMM
+	* GGM 2
+	* GGM 1
+	* craig recommended using sqrt + min/max and for the XMM with min=2E-7 and max=1.2E-5
+Chandra:
+	* GGM 3
+	* GGM 4
+	* try log 
+
+3/16/2023
