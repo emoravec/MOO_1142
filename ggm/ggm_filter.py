@@ -24,7 +24,8 @@ clean = True
 
 # ------------------------------------------------------------
 location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/'
-mooinp = location+'ggm/M2_luca/data/MOOJ1142_snr_no_pnt_src.fits'
+#mooinp = location+'ggm/M2_luca/data/MOOJ1142_snr_no_pnt_src.fits'
+mooinp = location+'M2/images/MOO_1142_M2_self-cal_map.fits'
 #mooinp = location+'xray/images/XMM/XMM_comb-net-image.fits'
 #mooinp = location+'xray/images/XMM/XMM_comb-net-center.fits' - use this one!
 #mooinp = location+'xray/images/XMM/XMM_comb-obj-im-400-7200.fits'
@@ -41,6 +42,7 @@ for kernel in range(1,9):
   newggm = scipy.ndimage.gaussian_gradient_magnitude(moodat,kernel)
 
   newhdu = fits.PrimaryHDU(newggm,moohdu[0].header)
+  newhdu.writeto(location+'ggm/M2/moo1142_M2.self-cal.ggm.{0}.fits'.format(kernel),overwrite=True)
   #newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combNetIm.ggm.{0}.fits'.format(kernel),overwrite=True)
   #newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combNetCenter.ggm.{0}.fits'.format(kernel),overwrite=True)
   #newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combObj.ggm.{0}.fits'.format(kernel),overwrite=True)
@@ -58,7 +60,8 @@ for kernel in range(1,9):
   newimg.ticks.set_tick_direction('in')
   newimg.ticks.set_color('black')
 
-  plt.savefig(location+'ggm/M2/pngs/moo1142_M2.ggm.{0}.png'.format(kernel))
+  #plt.savefig(location+'ggm/M2/pngs/moo1142_M2.ggm.{0}.png'.format(kernel))
+  plt.savefig(location+'ggm/M2/pdf/moo1142_M2.self-cal.ggm.{0}.pdf'.format(kernel))
   #plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetIm.ggm.{0}.pdf'.format(kernel))
   #plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetCenter.ggm.{0}.pdf'.format(kernel))
   #plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetObj.ggm.{0}.pdf'.format(kernel))

@@ -1,0 +1,116 @@
+Shock Hunting Moravec March 3rd, 2023 (3/3/23)
+
+GGM - does gradient of surface brightness. The peaks of the surface brightness distribution are zero.
+
+Goal: to define a region that contains a maximum in the gradient filter in M2, Xmm, and Chandra. To make a region that is informed by all of the images. Shocks will be a discontinuity in the gradient. 
+
+M2 -> Luca's GGM 5 (sharper) or 6 (a bit fuzzier)
+Chandra -> GGM 3 - 5
+XMM -> 2 or 3 (moo1142_xmm.combNetCenter.ggm.2.fits or moo_1142.combObj.ggm.2.fits)
+XMM Craig -> XMM_ggm_2_sarazin.fits
+
+DS9 -> craig recommended using sqrt + min/max and for the XMM with min=2E-7 and max=1.2E-5
+M2 (5) -> linear + min/max
+
+Compared all of these and made some thin and thick regions for both left and right. 
+
+Compared M2 GGM = 5, XMM GGM=2, Chandra GGM=3 and 4
+
+MOO_1142_right_shock_regions.png -> made a region that empasses a) just the discontinuity which I assume is the shock (Moravec_M2_ggm5_left_thin_conserv.reg) and b) the entire area of interest (Moravec_M2_ggm_right_largest.reg or Moravec_M2_ggm5_right_thick_medium.reg)
+MOO_1142_left_shock_regions_all.png -> made a region that empasseses a) just the discontinuity (Moravec_M2_ggm5_right_thin_conserv.reg) and b) the entire area of interest (Moravec_M2_ggm5_left_thick_medium.reg)
+MOO_1142_left_shock_regions_only_M2.png -> realized that the M2 thin regions that encompass only the shock, the outer edges tend to lie right where Chandra GGM stops so good to view without the regions?
+
+Questions: what do we want to encompass?
+
+3/6/2023
+Slack conversation over the weekend and March 6th, 2023
+From Tony:
+* I would expand the comparison to include the input (non-GGM) MUSTANG-2 image.
+* I would also check out GGM1 for XMM (it’s already smoothed by the PSF) as well as smaller numbers for M2
+* Use a linear scale for the MUSTANG-2 image - I use that already
+* try log for the x-ray and see how it looks 
+
+XMM_comb-net-centered.fits - now correct image with centeredd and 0s for masked areas. 
+XMM_comb-net-centered_incorrect.fits - original file that had nans for masked areas.
+
+From Craig about how to set a region for the shock: An elliptical pie wedge, where the curved part fits the shape and location of the shock, and the sides indicate its angular width.  (How far does the shock extend on either side of the apex?)
+From Tony: Yeah, it should be a whole sector including the angle subtended by the shock, with a start inside the cluster and an ending out at some preshock radius
+
+Compare:
+* non-GGM MUSTANG-2 image
+	* self-cal and non self-cal
+* M2
+	* Moravec chose GGM 5 before - now choosing GGM 4
+	* Tony says to check smaller numbers - yes I did that but can show the comparison with 3.
+	* use linear scale
+* XMM
+	* GGM 2
+	* GGM 1
+	* craig recommended using sqrt + min/max and for the XMM with min=2E-7 and max=1.2E-5
+Chandra:
+	* GGM 3
+	* GGM 4
+	* try log 
+
+3/17/2023
+* non-GGM MUSTANG-2 image
+	* self-cal and non self-cal
+* M2
+	* GGM 4
+	* GGM 2
+	* use linear scale
+* XMM
+	* GGM 2 - mine still has some wonkyness along chip line
+	* GGM 2 - craig
+	* GGM 1
+	* craig recommended using sqrt + min/max and for the XMM with min=2E-7 and max=1.2E-5
+	* sqrt is best
+Chandra:
+	* GGM 4
+	* GGM 2
+	* try log - sqrt is better
+
+astrocloud share link: https://astrocloud.nrao.edu/s/5AaxmF3LiEL6853
+
+Slack post and shock region refining notes:
+
+I compared the following images:
+	* M2 - point source subtracted SNR and self-cal image from Charles
+		* GGM 4
+		* GGM 2
+		* on linear scale
+		* I note that the self-cal image from Charles doesn't show a whole lot of structure - see MOO_1142_M2_compare_self-cal.png
+	* XMM
+		* GGM 2 - craigs
+		* GGM 2 - mine
+		* GGM 1
+		* sqrt stretch is best
+		* I will note that I still see some wonkyness along chip line in my XMM GGM images that are not in Craig's GMM. I don't know why this is. I assume some sort of residual of using different images.
+	Chandra:
+		* GGM 4
+		* GGM 2
+		* tried log strength but found sqrt is better
+
+For the RIGHT shock:
+First, I made some regions with the M2 images so that I would have a reference of the size and shape of the shock - Moravec_M2_right_shock_outline_ggm2.reg is smaller and based on the GGM=2 image and Moravec_M2_right_shock_outline_ggm4.reg. See 01_MOO_1142_right_shock_compare_shock_regions.png for a comparison of the two regions. I decided to use the smaller region for reference in the rest of the analysis. To see what that looks like see 02_MOO_1142_M2_all_right_shock.png.
+
+Second, I went to the X-ray to refine the region some more. Here is what the shock outline from M2 looks like on the X-ray images - 03_MOO_1142_X-ray_all_M2_right_shock.png. I created a large region that would encompass all the features of the shock outline from M2, but now encompass features from the X-ray data and create a slice that catches the variation from the central area of the cluster across the shock and give some padding on all sides - see 04_MOO_1142_right_shock_xray_small_large.png and 05_MOO_1142_right_shock_xray_large.png. I produced and intermediate region - Moravec_right_shock_xray.reg.
+
+Third, I went back to the M2 images to make sure I was catching all the large scale variation in the M2 image and giving the region some padding too - 07_MOO_1142_right_shock_M2_large.png. 
+
+Fourth, I went back to the X-ray images to make sure everything looked good, and it did (see 08_MOO_1142_right_shock_xray_large.png).
+
+The final region I have for the right shock is Moravec_right_shock.reg.
+
+For the LEFT shock I followed a similar procedure, starting with the M2 images, going to X-ray, then back to M2, but there was less refining in the last steps. 
+
+I started out with M2 images again and made a smaller (Moravec_M2_left_shock_outline_ggm2.reg) and larger (Moravec_M2_left_shock_outline_ggm4.reg) region to outline the shock. See 01_MOO_1142_left_shock_compare_shock_regions.png for a comparison of the two regions. I decided to use the smaller region for reference in the rest of the analysis. To see what that looks like see 02_MOO_1142_M2_left_all_shock.png.
+
+Second, I went to the X-ray to refine the region some more. Here is what the shock outline from M2 looks like on the X-ray images - 03_MOO_1142_X-ray_all_M2_left_shock.png. Again, I created a large region that would encompass all the features of interest - see 04_MOO_1142_left_shock_xray_small_large.png and 05_MOO_1142_left_shock_xray_large.png. I produced and intermediate region - Moravec_left_shock_xray.reg.
+
+Third, I went back to the M2 images and made the region just a little smaller for a final region of Moravec_left_shock.reg - see 06_MOO_1142_left_shock_M2_large.png.
+
+Here are the outline regions and the final regions. 
+
+You can find all of the input images, ggm variations, and pdfs of the ggms here: https://astrocloud.nrao.edu/s/5AaxmF3LiEL6853 -> see the chandra, m2, and xmm folders. If you would like to explore other ggms please feel free to do so. I found that GGM2 and 4 showed the most structure. All of the screenshots and regions I reference are in: https://astrocloud.nrao.edu/s/5AaxmF3LiEL6853 > regions. 
+
