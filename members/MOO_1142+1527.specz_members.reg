@@ -1,0 +1,26 @@
+global font="helvetica 10 normal" select=1 edit=1 move=1 delete=1 include=1 fixed=0 source
+global font="helvetica 10 normal" select=1 edit=1 move=1 delete=1 include=1 fixed=0 source
+fk5;circle( 175.66479 , 15.45086 ,2") # color = red, width = 2
+fk5;circle( 175.61104 , 15.46036 ,2") # color = red, width = 2
+fk5;circle( 175.68979 , 15.45342 ,2") # color = red, width = 2
+fk5;circle( 175.78612 , 15.45783 ,2") # color = red, width = 2
+fk5;circle( 175.65562 , 15.45825 ,2") # color = red, width = 2
+fk5;circle( 175.691083 , 15.457083 ,2") # color = red, width = 2
+fk5;circle( 175.67805 , 15.43999 ,2") # color = red, width = 2
+fk5;circle( 175.66988 , 15.45907 ,2") # color = red, width = 2
+fk5;circle( 175.67577 , 15.45011 ,2") # color = red, width = 2
+fk5;circle( 175.68103 , 15.44625 ,2") # color = red, width = 2
+fk5;circle( 175.68086 , 15.45159 ,2") # color = red, width = 2
+fk5;circle( 175.68279 , 15.45057 ,2") # color = red, width = 2
+fk5;circle( 175.68546 , 15.45089 ,2") # color = red, width = 2
+fk5;circle( 175.68726 , 15.45446 ,2") # color = red, width = 2
+fk5;circle( 175.69005 , 15.45346 ,2") # color = red, width = 2
+fk5;circle( 175.64637 , 15.46977 ,2") # color = red, width = 2
+fk5;circle( 175.66702 , 15.44128 ,2") # color = red, width = 2
+fk5;circle( 175.68115 , 15.45215 ,2") # color = red, width = 2
+fk5;circle( 175.68382 , 15.45079 ,2") # color = red, width = 2
+fk5;circle( 175.69007 , 15.45347 ,2") # color = red, width = 2
+fk5;circle( 175.72555 , 15.44856 ,2") # color = red, width = 2
+fk5;circle( 175.70691 , 15.45007 ,2") # color = red, width = 2
+fk5;circle( 175.7097 , 15.44643 ,2") # color = red, width = 2
+fk5;circle( 175.69739 , 15.46946 ,2") # color = red, width = 2

@@ -49,14 +49,14 @@ def read_photz(cat_path):
 wide_cat = read_photz(location / 'specrank.MOO1142.wide_nohst.rank.txt')
 print('Len Wide:', len(wide_cat))
 wide_tbl = Table(wide_cat)
-wide = wide_tbl[wide_tbl['Int_Pz']>0.3]
+wide = wide_tbl[wide_tbl['Int_Pz']>0.5]
 wide.sort(keys='Int_Pz',reverse=True)
 print('Len Wide Int_Pz cut:', len(wide))
-wide = wide[wide["Rad(')"]<2.0]
-print('Len Wide 2am cut:', len(wide))
+#wide = wide[wide["Rad(')"]<2.0]
+#print('Len Wide 2am cut:', len(wide))
 wide['RA'].name = 'ra'
 wide['DEC'].name = 'dec'
-wide.write(location/'MOO_1142.photz_wide_2am.fits',overwrite=True)
+wide.write(location/'MOO_1142.photz_wide_IntPz0.5.fits',overwrite=True)
 
 # hst_core_cat = read_photz(location / 'specrank.MOO1142.hst_core.rank.txt')
 # hst_core_tbl = Table(hst_core_cat)
