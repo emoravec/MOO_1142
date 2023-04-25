@@ -1,0 +1,4 @@
+# Region file format: DS9 version 4.1
+global color=green dashlist=8 3 width=1 font="helvetica 10 normal roman" select=1 highlite=1 dash=0 fixed=0 edit=1 move=1 delete=1 include=1 source=1
+fk5
+epanda(175.6965995789,15.4539211112,157.22597,207.46695,1,12.163",10.573",82.410",71.634",1,359.93745)

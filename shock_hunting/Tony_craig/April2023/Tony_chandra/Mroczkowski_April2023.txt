@@ -1,0 +1,32 @@
+Tony April 3rd, 2023: I'm on vacation this week, and all this is a work in progress.  The salient part is the "Moravec_right_shock_3.reg" has a single epanda region that @Craig L. Sarazin could try on the XMM data if he's around/available this week (the other region is in "image" coordinates and is very specific to the way the Chandra data were cropped).  This preliminary fitting i did prefers around 1 arcmin according to the jupyter notebook, but i'm not sure I'm interpreting that right.  the regions starts at 0.6', and the break around 1' in these plots is around 1.3' in the ds9 plots, which agrees better with the M2 break.
+
+I narrowed the right hand shock sector to better match the strongest part in the M2 image.
+Files:
+    - Moravec_right_shock_3_image.reg
+    - Moravec_right_shock_3.reg
+    - ne_chain_right_shock_3.dat
+    - ne_corner_plot_right_shock_3.pdf
+    - fit_broken_power_law_Moravec_right_shock_3_MOOJ1142.pdf
+    - Tony_regions_refined.png
+
+these are the Chandra threshed image, exposure map, and background
+Files:
+    - srcfree_bin1_500-4000_18277_band1_thresh.expmap
+    - srcfree_bin1_500-4000_18277_band1_thresh.img
+    - 18277_bin4_500-4000_bkgrnd_goodreg.img
+
+Tony April 12th, 2023: okay, the Chandra data are noisy, but consistent with a strong shock on the eastern side as well. So it's supportive, but let's see what the XMM and MUSTANG-2 constraints look like.
+Files:
+    - fit_broken_power_law_Moravec_left_shock_2_bin5_MOOJ1142-rangelimit.pdf
+    - Moravec_left_shock_2.reg
+    - Moravec_left_shock_image_2.reg
+
+Notes:
+    - the _image.reg files are the ds9 regions that are in the Chandra image units?
+    - the .reg files without _image in them are the ds9 regions that are in WCS and FK5
+
+Final regions to use:
+    - Moravec_right_shock_3.reg
+    - Moravec_left_shock_2.reg
+
+
