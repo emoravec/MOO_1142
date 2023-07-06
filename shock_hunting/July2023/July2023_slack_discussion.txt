@@ -1,0 +1,29 @@
+Tony M: i'm not sure i see a break around 25" (0.4 arcmin) in the Chandra data.  there's kind of a dip
+Chandra_Tony.png
+
+2:19
+(ignore the background for now... i'll get the stowed files, but this plot is not affected by any background)
+
+
+Tony Mroczkowski
+or with less binning:
+Chandra_Tony_less_binning.png
+
+or more?
+
+
+11:15
+that's with a min of 18 counts
+
+
+Craig L. Sarazin
+  1:59 PM
+In the version will the most binning, the slope does seem to change after the third point, at around 20".   But, this is not what one expects for a shock or a cold front.   Also, are the wedges centered on the peak of the cluster?  If not, the slope would change at r ~ distance off center, which could easily be 20" or so.
+
+
+Tony Mroczkowski
+  3:58 PM
+yeah, it's not the center, but the vertex of that region file you sent me
+4:00
+so i agree, it could be another 5" to the cluster center
+region.png
