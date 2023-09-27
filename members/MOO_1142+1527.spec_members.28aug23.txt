@@ -1,0 +1,38 @@
+# Updated March 2023; includes KSZ maska from Feb-2022 and DEIMOS redshifts from April 2015
+# Does not include Keck masks observed in Dec 2022 (m1142deca) nor Jan 2023 (m1142kszd)
+# All Coordinates on GMOS image system
+# gmos ID numbers do not match with those in the red-sequence selected file
+# but the Mosfire ID numbers do match
+# gmos ID are from an older version of the catalogs
+# Quality flags A/B are correct and C are probably correct 
+# ID		RA		Dec		z	Q	comment
+ksza1465_1992   175.66479       15.45086        1.185   C       D4000
+ksza64291535061210 175.61104    15.46036        1.193   C       3727?
+ksza2114_1235   175.68979       15.45342        1.20    C       D4000
+ksza64291535192523 175.78612    15.45783        1.204   C       3727?
+ksza64291535061681 175.65562    15.45825        1.22    C       3727?
+keck1050        175.691083      15.457083       1.19    B       D4000
+gmos1242	175.70724	15.44302	0.83	C	H+K?
+gmos1363	175.69009	15.47355	1.10    C       D4000?
+gmos1412	175.68350	15.48249	0.7386	A	Hb,5007;3727 
+gmos1492	175.68861	15.46889	0.933	B	H+K
+gmos2885	175.67685	15.43962	1.056	B	H+K
+gmos2896	175.67805	15.43999	1.2342	B	3727
+gmos3034	175.67577	15.45011	1.19    B       D4000
+gmos3135	175.67882	15.44839	1.08	C	D4000
+gmos3155	175.68103	15.44625	1.19	B	H+K
+gmos3213	175.68086	15.45159	1.19    B       D4000
+gmos3280	175.67220	15.46664	0.7221	A	Hb,5007
+gmos3318	175.68279	15.45057	1.179   A	H+K
+gmos3385	175.68546	15.45089	1.19	C	D4000
+gmos3511	175.68726	15.45446	1.22	C	 H+K
+gmos3560	175.69005	15.45346	1.20	B	H+K;KSZA-Feb22
+gmos3586	175.68744	15.46255	0.93	C	H+K
+MY_1359           175.64637    15.46977		1.226	C	5007?
+MY_1473ser        175.66702    15.44128		1.2007	A	5007,4959,Hb;DEIMOS1473
+MY_1845           175.68115    15.45215		1.194	C	5007?,Hb?
+MY_1962ser        175.68382    15.45079		1.2401	A	5007,4959
+MY_2114           175.69007    15.45347		1.2027	B	5007,Hb
+MY_394            175.72555    15.44856		1.183	B	5007?
+MY_769            175.70691    15.45007		1.1715	B	5007,Hb
+MY_774             175.7097    15.44643		1.2001  A	S;KSZA-Feb22
