@@ -8,8 +8,6 @@ matplotlib.rc('font',**{'family':'serif','sans-serif':['Times'],'size':11})
 matplotlib.rc('text',usetex=True)
 plt.rc('text.latex', preamble=r'\usepackage{newtxtext}')
 plt.rc('text.latex', preamble=r'\usepackage{newtxmath}')
-plt.rc('font',family='serif',size=14)
-plt.rc('text',usetex=True)
 
 from palettable.cartocolors.sequential import Mint_7 as pal4
 cmap = pal4.mpl_colormap
@@ -104,7 +102,7 @@ def make_keck_plot(hdu,coord_array,specz_coord_array,cluster,image_size):
     levels = density_img.show_contour(xray_img,returnlevels=True,levels=xray_contour_levels,smooth=1,colors='black',linestyles='-',linewidths=1,zorder=1)
 
     # save plot
-    plt.savefig(f'/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/proposals/Keck/{cluster}_opt-ir-dist_Chandra_contours.pdf',format='pdf',dpi=300)
+    plt.savefig(f'/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/proposals/Keck/{cluster}_opt-ir-dist_Chandra_contours_vst.pdf',format='pdf',dpi=300)
 # ------------------------------------------------------------------------------------------- #
 cluster_info = Table.read(location / 'tables/high_z/vla21b_sample_MC.csv',format='ascii.csv')
 cluster_info.add_index('Name')
