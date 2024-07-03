@@ -1,0 +1,32 @@
+11/23/23 - Dakalo
+Hi all,
+I have been working on the MeerKAT data for mooJ1142p1527. I reduced the data with CARACal until the self-cal step (image-1675469263_sdp_l0-J1142_7_p_1527-corr.ms-caral_wsclean-MFS-I-image.png). After that, I took the MS file (after the self-cal step of CARACal) and used WSClean for imaging to enforce the circular beam (CARACal does not enforce the circular beam, and it elongates the sources). The following are some of the image specs:
+Restoring beam = 8.11993" x 8.11993'', p.a. = 0 deg
+Weight briggs = 0
+RMS = 7.18 μJy/beam
+The flux density of the BCG is 38.9 mJy
+I used PyBDSF to obtain the positions of the compact/point sources. Then, I used Crystalball to create the point sources data column in the MS file and used MSUtils to subtract the point sources from the corrected data column. Afterwards, I used WSClean to image the full-resolution image after source subtraction (1675469263_sdp_l0-J1142_7_p_1527-corr.ms-sub_pointsource-MFS-I-image1.png and 1675469263_sdp_l0-J1142_7_p_1527-corr.ms-sub_pointsource-MFS-I-image2.png). The two images after point source subtraction are the same, just showing one with three-point source regions that were prominent around the central region and the other with all the point source regions. I also produced the large-scale diffuse emission (low-resolution map) image (1675469263_sdp_l0-J1142_7_p_1527-corr.ms-sub_short_baseline-MFS-I-image.png) using the uv-range ≤ 13 kλ. The flux density of the diffuse emission is ~ 1.58 +/- 0.028 mJy, and its luminosity (not k-corrected) is ~ 1.31 x 10^25 W.Hz-1.
+There may be more diffuse emission we cannot see because of the BCG, and after subtraction, there are dark patches that appear in the central region, affecting the recovery of the diffuse emission
+
+I have attached the radial surface brightness profile for the diffuse emission and the masked AGN/BCG. There is a dip, which might be due to artifacts in the image.
+I also smoothed the diffuse emission image (the left-hand-side image is the full-resolution diffuse emission image, and the right-hand-side is the smoothed image on the attachment) using the CIOA (https://cxc.cfa.harvard.edu/ciao/index.html) software package with the default inputs (kernelspec=lib:gaus(2,5,1,7,7)), which involves convolving with a Gaussian. The flux density of the smoothed diffuse emission is ~ 1.41 +/- 0.018 mJy, and its linear size is about 0.93 Mpc.
+
+attached is the comparison of the radial profiles obtained from MeerKAT and X-ray data
+
+I am unfamiliar with the X-data. I attempted to mask the BCG in the FITS image you provided. I utilised a straightforward Python code where I applied a threshold to the BCG (Otsu's thresholding) and removed neighbouring sources. The problem is that the radial profile exhibits gaps (it is discontinuous).
+In the case of MeerKAT data, I used a different approach to mask the BCG. I subtracted all other point sources in the vicinity of the central region and subsequently imaged the visibilities with longer baselines (high-resolution maps) to eliminate the diffuse emission.
+
+Matt Hilton - Don't you make an image with just the longer baselines, find the compact sources, and then subtract them from the visibilities? And then make a low resolution image (short base lines only) to get an image of the diffuse emission ony (as per your earlier post)?
+
+Hi all,
+Attached is the illustration of how I masked the BCG (using comb-net-image.fits) and the radial profile of both the masked and unmasked data.
+I have modified the method of masking; now, I utilise the coordinates and radius of the BCG. The white square (which are nan values) on the BCG masked data varies as I adjust the radius. I am uncertain whether this masking approach is correct.
+I am no longer getting gaps on the radial profile.
+
+12/3/24 - Craig L. Sarazin
+Yes, we can either mask the AGN, or model the central emission of the east subcluster as a point source plus a cluster cluster component, and subtract the point source.  One complication in the X-ray is that there probably is a cool core with peaked emission at the center of the cluster, which will make it more difficult to constrain the AGN flux.  In principle, the Chandra data should do better at this given the much smaller PSF.   However, the Chandra and XMM observations are nearly 3 years apart, so the AGN might have varied.
+
+Dakalo mentioned gaps in the XMM radial profile.   There shouldn’t be any gaps.  If you have it, could you send the radial profile you found with the gaps?  There are chip gaps in the ccds, but there are three telescopes and three ccds, and the chip gaps and bad pixels/columns don’t match up.   So, the exposure map in the combined image corrects for any chip gaps.   The remaining problem is just that the data statistics are worse in the gaps (fewer photons).
+
+1/8/24 - Dakalo
+The integrated flux of the halo before smoothing the emission is approximately 1.58 ± 0.02 mJy, and after smoothing, it is about 1.41 ± 0.018 mJy (I used https://github.com/mhardcastle/radioflux for measurement).
