@@ -24,15 +24,19 @@ clean = True
 
 # ------------------------------------------------------------
 location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/'
+
+# M2 images
 #mooinp = location+'ggm/M2_luca/data/MOOJ1142_snr_no_pnt_src.fits'
-mooinp = location+'M2/images/MOO_1142_M2_self-cal_map.fits'
+#mooinp = location+'M2/images/MOO_1142_M2_self-cal_map.fits'
+mooinp = location+'M2/images/midas/2024-07-03_Kelvin_MOO_1142_2asp_pca0_qm2_fitel_0f070-to-49f9Hz_1p0rr_L_dt20_map_iter1.fits'
+
+# Xray images
 #mooinp = location+'xray/images/XMM/XMM_comb-net-image.fits'
 #mooinp = location+'xray/images/XMM/XMM_comb-net-center.fits' - use this one!
 #mooinp = location+'xray/images/XMM/XMM_comb-obj-im-400-7200.fits'
 #mooinp = location+'xray/images/Chandra/Chandra_0.5-4_flux.img'
 
 moohdu = fits.open(mooinp)
-
 moodat = moohdu[0].data
 
 for kernel in range(1,9):
@@ -42,14 +46,19 @@ for kernel in range(1,9):
   newggm = scipy.ndimage.gaussian_gradient_magnitude(moodat,kernel)
 
   newhdu = fits.PrimaryHDU(newggm,moohdu[0].header)
-  newhdu.writeto(location+'ggm/M2/moo1142_M2.self-cal.ggm.{0}.fits'.format(kernel),overwrite=True)
+  # M2 images
+  #newhdu.writeto(location+'ggm/M2/moo1142_M2.self-cal.ggm.{0}.fits'.format(kernel),overwrite=True)
+  newhdu.writeto(location+'ggm/M2/2024-07/moo1142_M2_only_good.ggm.{0}.fits'.format(kernel),overwrite=True)
+  # X-ray images
   #newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combNetIm.ggm.{0}.fits'.format(kernel),overwrite=True)
   #newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combNetCenter.ggm.{0}.fits'.format(kernel),overwrite=True)
   #newhdu.writeto(location+'ggm/XMM/scipy/moo1142_xxm.combObj.ggm.{0}.fits'.format(kernel),overwrite=True)
   #newhdu.writeto(location+'ggm/Chandra/moo1142_chandra_ggm.{0}.fits'.format(kernel),overwrite=True)
 
   newmin = np.nanmin(newhdu.data) if mspan else -np.nanmax(np.abs(newhdu.data))
+  print(newmin)
   newmax = np.nanmax(newhdu.data) if mspan else  np.nanmax(np.abs(newhdu.data))
+  print(newmax)
 
   newimg = aplpy.FITSFigure(data=newhdu,figure=newfig,convention='wells')
   newimg.show_colorscale(cmap='RdBu_r',vmin=newmin,vmax=newmax)
@@ -60,8 +69,11 @@ for kernel in range(1,9):
   newimg.ticks.set_tick_direction('in')
   newimg.ticks.set_color('black')
 
+  # M2
   #plt.savefig(location+'ggm/M2/pngs/moo1142_M2.ggm.{0}.png'.format(kernel))
-  plt.savefig(location+'ggm/M2/pdf/moo1142_M2.self-cal.ggm.{0}.pdf'.format(kernel))
+  #plt.savefig(location+'ggm/M2/pdf/moo1142_M2.self-cal.ggm.{0}.pdf'.format(kernel))
+  plt.savefig(location+'ggm/M2/2024-07/pdfs/moo1142_M2_only_good.ggm.{0}.pdf'.format(kernel))
+  # Xray
   #plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetIm.ggm.{0}.pdf'.format(kernel))
   #plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetCenter.ggm.{0}.pdf'.format(kernel))
   #plt.savefig(location+'ggm/XMM/scipy/pdf/moo1142_xxm.combNetObj.ggm.{0}.pdf'.format(kernel))

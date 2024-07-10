@@ -14,9 +14,6 @@ newcolors = np.vstack((top(np.linspace(0, 1, 128)),bottom(np.linspace(0, 1, 128)
 from matplotlib.colors import ListedColormap
 cm.register_cmap('OrangeBlue', cmap = ListedColormap(newcolors))
 cmap = 'OrangeBlue'
-
-# vmin=-3
-# vmax=+3
 # ------------------ #
 def plot_minkasi_maps(N,M,tod_class,save_path):
     for n in N:
@@ -53,7 +50,7 @@ def plot_minkasi_maps(N,M,tod_class,save_path):
 # ------------------ #
 location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/'
 moo1142_ra, moo1142_dec = np.rad2deg([3.06642436, 0.26972541])
-tod_class = 'all'
+tod_class = 'good'
 tod_class_path = location + tod_class + '/'
 N_array = [1,2,3,4,5]
 M_array = [1,5,15,25,50]
