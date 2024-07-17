@@ -13,7 +13,9 @@ start_time = time.time()
 
 #set file root for output maps
 #outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/test/PREFIX" 
-outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/remove_no/MOO_1142_maybe_good" 
+#outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/good/MOO_1142_good" 
+#outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/remove_no/MOO_1142_maybe_good" 
+outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/all/MOO_1142_all" 
 
 #find tod files we want to map
 idir = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/TODs/data/" 
@@ -23,11 +25,11 @@ if len(tod_names)==0:
     print('We found no TOD files.  Double check your path?')
     assert(1==0)
 
-#Use presets by source to automatically get and cut TODs
-#that were manually flagged for removal
-bad_tod, _ = minkasi.get_bad_tods("moo1142")
-tod_names = minkasi.cut_blacklist(tod_names, bad_tod)
-print('The Number of TODs being USED is:',len(tod_names))
+# #Use presets by source to automatically get and cut TODs
+# #that were manually flagged for removal
+# bad_tod, _ = minkasi.get_bad_tods("moo1142")
+# tod_names = minkasi.cut_blacklist(tod_names, bad_tod)
+# print('The Number of TODs being USED is:',len(tod_names))
 
 #if running MPI, you would want to split up files between processes
 #one easy way is to say to this:
