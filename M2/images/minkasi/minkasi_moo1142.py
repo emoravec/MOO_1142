@@ -27,7 +27,7 @@ if len(tod_names)==0:
 
 #Use presets by source to automatically get and cut TODs
 #that were manually flagged for removal
-bad_tod, _ = minkasi.get_bad_tods("RXJ1347")
+bad_tod, _ = minkasi.get_bad_tods("moo1142")
 tod_names = minkasi.cut_blacklist(tod_names, bad_tod)
 
 #if running MPI, you would want to split up files between processes
