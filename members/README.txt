@@ -18,6 +18,10 @@ The following files were made from these specrank files from Mark
 	- MOO_1142.photz_wide_2am* -> hst core within 2am of cluster center
 	- MOO_1142.photz_wide_IntPz* -> hst core with the IntPz >= to that in file name
 	- MOO_1142.photz_wide_IntPz0.6_ALMA.fits -> used for ALMA CO proposal submitted in Spring 2023
+
+Files of the form *_galdens*.fits -> smoothed member distributions using the galdens code adapted from Luca.
+Files of the form *photz*.fits without the _galdens are the catalogs of the members. 
+
 MOO_1142+1527.galdens_smoothed_Luca.fits -> not sure - what Luca used in Dicker2020?
 MOO_1142+1527.MC_filtered_members.reg -> members that are identified from the Gonzalez+19 search (color-color analysis) which are in MOO_1142+1527.spitzer_ps.cat_filtered.out
 

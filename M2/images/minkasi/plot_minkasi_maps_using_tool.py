@@ -40,7 +40,6 @@ start_time = time.time()
 # do plotting
 plot_minkasi_maps(N_array,M_array,tod_class,tod_class_path)
 
-print('done')
 # Record the end time
 end_time = time.time()
 
