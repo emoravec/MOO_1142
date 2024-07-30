@@ -89,7 +89,6 @@ def plot_minkasi_maps(N,M,tod_class,save_path):
             image_fits_path = tod_class_path + n_m_file_name +'.fits'
             do_plotting(n_m_file_name,image_fits_path,save_path)
 
-            
 # ------------------ #
 location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/'
 tod_class = 'good'
