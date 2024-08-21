@@ -50,7 +50,7 @@ specz_members = Table.read(specz_members_path)
 specz_members_zrange = specz_members[(specz_members['z'] > 1.0) & (specz_members['z'] < 1.4)]
 specz_member_coords = np.array([specz_members_zrange['RA'], specz_members_zrange['Dec']]).T
 
-def plot_data(base_image,show_specz=False):
+def plot_data(base_image,show_specz=False,show_photz=False):
     base_image_hdu = fits.open(base_image)
     base_image_data = base_image_hdu[0].data
 
@@ -72,10 +72,13 @@ def plot_data(base_image,show_specz=False):
     # speczs
     if show_specz == True:
         img.show_markers(specz_member_coords[:,0],specz_member_coords[:,1],coords_frame='world',s=150,edgecolor='k',facecolor='yellow',marker='*',zorder=3)
+    # photz
+    if show_specz == True:
+        img.show_markers(specz_member_coords[:,0],specz_member_coords[:,1],coords_frame='world',s=150,edgecolor='k',facecolor='yellow',marker='*',zorder=3)
 
-    # plt.savefig(location / 'multi-wavelength_figures/M2_base/MOO_1142_baseM2.pdf', format='pdf', dpi=300)
-    # plt.close()
-    plt.show()
+    plt.savefig(location / 'multi-wavelength_figures/M2_base/MOO_1142_baseM2_specz.pdf', format='pdf', dpi=300)
+    plt.close()
+    # plt.show()
     
 # -------------------------------------------------------------------------------------------- #
 plot_data(base_image = M2_image_path,
