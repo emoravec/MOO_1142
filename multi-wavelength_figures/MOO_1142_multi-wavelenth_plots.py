@@ -5,7 +5,6 @@ Created in 2024-07
 """
 import aplpy
 
-from astropy.nddata import Cutout2D
 from astropy.coordinates import SkyCoord
 from astropy.io import fits
 from astropy.nddata import Cutout2D
