@@ -9,7 +9,6 @@ from astropy.nddata import Cutout2D
 from astropy.coordinates import SkyCoord
 from astropy.io import fits
 from astropy.wcs import WCS
-from astropy.nddata import Cutout2D
 from astropy import units as u
 
 import matplotlib
