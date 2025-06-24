@@ -1,0 +1,110 @@
+constants:
+  Te: 5.0
+  freq: 90e9
+  z: 1.19
+coords:
+  dr: '2.0'
+  dz: 2.0
+  r_map: 3.0*60
+  x0: Angle('11 42 47.44 hours').to(u.radian).value
+  y0: Angle('15:27:13.10 degrees').to(u.radian).value
+datasets:
+  mustang2:
+    beam:
+      amp1: 0.9808
+      amp2: 0.0192
+      fwhm1: '9.735'
+      fwhm2: '32.627'
+    copy_noise: false
+    dograd: false
+    funcs:
+      get_files: mf.get_files
+      get_info: mf.get_info
+      load: mf.load_tods
+      load_tods: mf.load_tods
+      make_beam: mf.make_beam
+      postfit: mf.postfit
+      postproc: mf.postproc
+      preproc: mf.preproc
+    minkasi_noise:
+      args: '[]'
+      class: minkasi.mapmaking.noise.NoiseSmoothedSVD
+      kwargs: '{''fwhm'':10}'
+    noise:
+      args: '[]'
+      class: jn.NoiseSmoothedSVD
+      kwargs: '{''fwhm'':10}'
+    npass: 1
+    prefactor: float(wu.get_da(cfg['constants']['z'])*wu.y2K_RJ(90e9, cfg['constants']['Te'])*wu.XMpc/wu.me)
+fit: true
+fitting:
+  chitol: 1e-5
+  maxiter: 10
+imports:
+  astropy.coordinates:
+  - Angle
+  astropy.units: u
+  jitkasi.noise: jn
+  witch.external.minkasi.funcs: mf
+map: true
+mem_starved: false
+model:
+  structures:
+    gnfw_rs:
+      parameters:
+        P0:
+          to_fit: true
+          value: 0.103
+        alpha:
+          to_fit: true
+          value: 1.551
+        beta:
+          to_fit: true
+          value: 5.4905
+        dx_1:
+          value: 0.0
+        dy_1:
+          value: 0.0
+        dz_1:
+          value: 0.0
+        gamma:
+          priors:
+          - 0.0
+          - 5.0
+          to_fit: true
+          value: 0.3081
+        r_s:
+          to_fit: true
+          value: 100.0
+        z:
+          value: 1.19
+      structure: gnfw_rs
+    ps_gauss:
+      parameters:
+        amp_g:
+          to_fit: true
+          value: 0.00128582673
+        dx_g:
+          to_fit: true
+          value: 1.78
+        dy_g:
+          to_fit: true
+          value: -3.38
+        sigma:
+          to_fit: true
+          value: 4.0
+      structure: gaussian
+  unit_conversion: float(wu.get_da(constants['z'])*wu.y2K_RJ(constants['freq'], constants['Te'])*wu.XMpc/wu.me)
+model_map: true
+n_rounds: 4
+name: MOOJ1142
+paths:
+  glob: Signal_TOD*.fits
+  ndo: false
+  odo: false
+  outroot: ''
+  subdir: xray_peak_rs
+  tods: MOOJ1142
+sim: false
+sub: true
+wnoise: false
