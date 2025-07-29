@@ -31,6 +31,8 @@ MOO_1142+1527.MC_filtered_members.reg -> members that are identified from the Go
 
 	* m1142p1527.redshifts.28aug23.txt  -> spectroscopic members from Adam Stanford sent on August 28th, 2023 -> Attached is a summary of all of our redshifts on m1142.  I think there are ~20 spec-z members already before including ones from the two masks observed in Dec 2022 and Jan 2023.  My initial reductions of those masks could be improved so not sure about the final yields but I think there are about 10 new spec-z members in those two masks.  We did not get anything from the masks designed for the March 2023 nights which were lost mainly because of weather.
 		* Emily Moravec removed anything that was not marked A-C to make MOO_1142+1527.spec_members.28aug23.txt
+		* 2025-07-29: Somehow MOO_1142+1527.spec_members.28aug23.txt doesn't have all A-C from m1142p1527.redshifts.28aug23.txt? Not sure if I applied some other cuts somehow?
+		* 2025-07-29: Emiliy Moravec filtered out the sources with Q == 'A-D' to make m1142p1527.redshifts.28aug23.goodQ.txt 
 
 	* Use /Users/emoravec/Documents/Research/merging_clusters/analysis/vla21b/cluster_members/make_ds9_region_members.py to convert to fits file.
 
