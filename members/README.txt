@@ -34,9 +34,13 @@ MOO_1142+1527.MC_filtered_members.reg -> members that are identified from the Go
 		* 2025-07-29: Somehow MOO_1142+1527.speczs.28aug23.txt doesn't have all A-C from m1142p1527.redshifts.28aug23.txt? Not sure if I applied some other cuts somehow?
 		* 2025-07-29: Emily Moravec filtered out the sources with Q == 'A-D' to make m1142p1527.redshifts.28aug23.goodQ.txt 
 
-	* 2025-07-30: Adam Stanford said that, "I’d suggest using 0.003 for the uncertainties."
 	* M1142+1527.internal.redshifts-30jul25.txt - sent by Adam Stanford on 2025-07-30
+		* most updated version of the speczs for MOO 1142. He said, "This was the compilation I made back in January - there is an extensive header outlining various issues that remain."
 		* run speczs/convert_txt_to_fits.py to create M00_1142+1527.speczs.30jul25.fits and M00_1142+1527.speczs.30jul25.csv
+		* 2025-07-30: Adam Stanford said that, "I’d suggest using 0.003 for the uncertainties."
+
+	* MOO_1142+1527.speczs.goodQ.pyrostat.members.14aug25.txt
+		* Using convert_txt_to_fits.py, I wrote out the speczs with good quality redshifts (quality 3-1) from M1142+1527.internal.redshifts-30jul25.txt to send to Anthony. He then ran pyrostat on this file. Explanatio of pyrostat: "the code basically does an iterative sigma-clipping to compute the velocity dispersion and keep galaxies that are within 3 sigma of the mean velocity. " After running pyrostat, he sent this list back to me and said "The biweight redshift is 1.1934 with 36 members."
 
 	* Use /Users/emoravec/Documents/Research/merging_clusters/analysis/vla21b/cluster_members/make_ds9_region_members.py to convert to fits file.
 
