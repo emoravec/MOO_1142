@@ -1,0 +1,47 @@
+
+MOO1142 Centers
+
+X-ray:
+
+XMM Peak:
+11:42:47.44   +15:27:13.1    +-  ~0.5" in each direction
+
+XMM Main Subcluster Centroid:
+11:42:47.34   +15:27:13.1    +-  ~0.2" in each direction (statistical error only)i
+
+XMM Whole Cluster Centroid
+11:42:46.82   +15:27:15.7 +- 0.5" in each direction
+
+Chandra Peak:
+11:42:47.421  +15:27:11.48.  = radio source
+"This source is located on the east side of the SZ peak of MOO J1142+1527 at the same location of the X-ray peak emission measured by Chandra (see Section 4). Its location also coincides with that of the brightest cluster galaxy (BCG) observed in infrared by Spitzer (see Section 5)."
+
+Chandra Centroid:
+11:42:46.77   +15:27:15.1.   estimated from Ruppen 2020 Fig. 5
+
+
+SZ:
+
+NIKA2 Peak:
+11:42:45.9    +15:27:12.0
+
+M2 Center:
+11:42:46.17   +15:27:13.7
+
+Radio Source:
+11:42:47.421  +15:27:11.48
+
+----------------------------------
+
+Summarizing:
+
+center of main subcluster
+11:42:47.421  +15:27:11.48 radio, Chandra peak
+11:42:47.44   +15:27:13.1  XMM peak 1.6" off
+11:42:47.34   +15:27:13.1  XMM main centroid 2.0" off
+
+Whole Cluster
+11:42:46.82  +15:27:15.7 XMM whole cluster cenroid
+11:42:46.77  +15:27:15.1 Chandra centroid whole cluster 1" off
+11:42:46.17  +15:27:13.7 M2 center 10" off
+11:42:45.9   +15:27:12.0 NIKA 2 peak 14" off
