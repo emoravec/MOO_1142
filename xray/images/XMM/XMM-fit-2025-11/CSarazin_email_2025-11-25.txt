@@ -1,0 +1,22 @@
+Hi:
+
+I wanted to send out the results of the fitting of the XMM X-ray image of MOO1142. All of the work here is Eleonora’s! I am just sending this out as she is tied up with another commitment for a while. The best-fit required a tiny bit of by-hand tweaking of the amplitude of the subcluster. Eleonora used the C statistic and the AIC test to find that the by-hand fit was indeed slightly better.
+
+Eleonora tested the best-fit model to see if it was, in fact, a good fit.  She used the goodness-of-fit test based on the C statistic. A useful parameter for this is the value of C_fit/dof, the C statistic for the divided by the number of degrees of freedom in the fit (the number of pixels minus the number of free parameters in the fit). This corresponds to chi^2/dof in the limit of a very large number of photons. The value of C_fit/dof was
+
+C_fit/dof = 1.25
+
+The expected value if the model was a perfect fit (if the data were actually drawn from the model with Poisson statistics is
+
+C_exp = 1.11 +- 0.016
+
+where the “error” is the sqrt(Var), and Var is the variance is C for a perfect fit.
+
+So, the fit is pretty good, but certainly not perfect. The residuals (XMM_resid.pdf) show a clear quadrupole pattern around the main cluster, indicating that the main cluster is somewhat elliptical. This is clear in the X-ray images. However, at a meeting maybe a year ago or so, we decided to stick to circular models to simplify things. If we want to stay with that, then this X-ray fit is probably the best one can do.
+
+The best fit parameters are listed in Fit_Result, and the corner plots, total model, models for the mail cluster and subcluster are attached as well.
+
+I am working on fitting the X-ray spectra, which will allow the X-ray model to be converted into gas densities, assuming the subclusters are spherical.
+
+Cheers,
+Craig
