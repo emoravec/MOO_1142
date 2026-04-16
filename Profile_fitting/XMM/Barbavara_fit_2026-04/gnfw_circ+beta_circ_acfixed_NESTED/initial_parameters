@@ -1,0 +1,14 @@
+#Parameter  min_value  max_value 
+x_main             3.0000e+01      4.3000e+01      
+y_main             3.4000e+01      4.7000e+01      
+rs_main(arcmin)    5.0000e-02      3.0000e-01      
+x_sub             4.2000e+01      5.5000e+01      
+y_sub             3.7000e+01      5.0000e+01      
+rc_sub(arcmin)    5.0000e-02      4.0000e-01      
+beta_main          1.0000e+00      7.0000e+00      
+beta_sub          2.0000e+00      6.0000e+00      
+alpha_main         2.2600e+00                
+gamma_main         9.3000e-01                
+A_main             1.0000e+00      1.0000e+03      
+A_sub             1.0000e+00      3.0000e+02      
+a_bkg            7.0000e-01      1.3000e+00      
