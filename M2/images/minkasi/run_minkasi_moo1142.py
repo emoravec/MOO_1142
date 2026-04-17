@@ -5,20 +5,24 @@ import minkasi.minkasi_all as minkasi
 import time
 import glob
 import os
+from pathlib import Path
 #reload(minkasi)
 #plt.ion()
 
 # Record the start time
 start_time = time.time()
 
+repo_root = Path(__file__).resolve().parents[3]
+minkasi_dir = Path(__file__).resolve().parent
+
 #set file root for output maps
-#outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/test/PREFIX" 
-outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/good/MOO_1142_good" 
-#outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/remove_no/MOO_1142_maybe_good" 
-#outroot = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/all/MOO_1142_all" 
+#outroot = str(minkasi_dir / "test/PREFIX")
+outroot = str(minkasi_dir / "good/MOO_1142_good")
+#outroot = str(minkasi_dir / "remove_no/MOO_1142_maybe_good")
+#outroot = str(minkasi_dir / "all/MOO_1142_all")
 
 #find tod files we want to map
-idir = "/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/TODs/data/" 
+idir = str(repo_root / "M2/TODs/data")
 tod_names=glob.glob(idir+'/Sig*.fits') # all
 #tod_names=glob.glob(idir+'/Signal*23B_005_01*.fits')
 if len(tod_names)==0:

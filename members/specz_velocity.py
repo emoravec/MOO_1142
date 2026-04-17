@@ -11,7 +11,7 @@ from pathlib import Path
 from astropy import constants as const
 from astropy.table import Table
 # -------------------------------------------------------------------------------------------- #
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/members')
+location = Path(__file__).resolve().parent
 def calculate_velocity(z):
     """Calculate the velocity corresponding to a given redshift."""
     c = const.c.to('km/s').value  # Speed of light in km/s

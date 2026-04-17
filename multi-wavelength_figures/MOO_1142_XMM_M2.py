@@ -14,13 +14,13 @@ import aplpy
 from astropy import units as u
 from astropy.coordinates import SkyCoord
 # -------------------------------------------------------------------------------------------- #
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/')
+location = Path(__file__).resolve().parent.parent
 xmm_image = location / "xray/images/XMM/smoothed/XMM_comb-net-center_smoothed_10arcsec.fits"
 #m2_image = location / "M2/images/minkasi/2025-11_JackOS/cutouts/smoothed/MOO_1142_signal_4p5_by_eye_ctr_smoothed_10arcsec.fits"
 m2_image = location / "M2/images/minkasi/2025-11_JackOS/cutouts/smoothed/MOO_1142_PS_sub_4p5_by_eye_ctr_smoothed_10arcsec.fits"
 
 # Image centers
-# from /Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/profile_fitting/XMM/XMM_fit_coords_EBarbavara.txt
+# from /Users/emoravec/Documents/Research/MOO_1142/profile_fitting/XMM/XMM_fit_coords_EBarbavara.txt
 # which is Eleonora's fit to the main and west subcluster
 main_cluster = SkyCoord(175.69766238,15.45364413,unit='deg')
 west_cluster = SkyCoord(175.68837814,15.45566318,unit='deg')
@@ -123,8 +123,8 @@ def main():
 	show_points_of_interest(right_panel)
 
 	# Save/show plot
-	fig.savefig(location / "multi-wavelength_figures/XMM_M2/MOO_1142_XMM_comb-net_M2_PS_sub_RB_BCG_subclusters.pdf", dpi=300, bbox_inches="tight")
-	#plt.show()
+	#fig.savefig(location / "multi-wavelength_figures/XMM_M2/MOO_1142_XMM_comb-net_M2_PS_sub_RB_BCG_subclusters.pdf", dpi=300, bbox_inches="tight")
+	plt.show()
 
 if __name__ == "__main__":
 	main()

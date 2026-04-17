@@ -10,7 +10,7 @@ from astropy.coordinates import SkyCoord
 from astropy.table import Table,vstack
 from astropy import units as u
 # -------------------------------------------------------------------------------------------- #
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/members/specz/')
+location = Path(__file__).resolve().parent
 
 def read_specz_text_file(table_path,header_start,header_end,column_names_line,table_start,table_end,column_names_for_numeric_value):
     with open(table_path) as file:

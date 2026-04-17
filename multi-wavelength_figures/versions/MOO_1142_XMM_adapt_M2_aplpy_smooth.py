@@ -18,13 +18,13 @@ from astropy.table import Table
 from astropy.wcs import WCS
 from astropy.wcs.utils import proj_plane_pixel_scales
 # -------------------------------------------------------------------------------------------- #
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/')
+location = Path(__file__).resolve().parents[2]
 xmm_image = location / "xray/images/XMM/XMM_adapt-400-7200.fits"
 #xmm_image = location / "xray/images/XMM/XMM_comb-net-center.fits"
 m2_image = location / "M2/images/minkasi/2025-11_JackOS/MOO_1142_signal.fits"
 
 # Image centers
-# from /Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/profile_fitting/XMM/XMM_fit_coords_EBarbavara.txt
+# from /Users/emoravec/Documents/Research/MOO_1142/profile_fitting/XMM/XMM_fit_coords_EBarbavara.txt
 # which is Eleonora's fit to the main and west subcluster
 main = SkyCoord(175.69766238,15.45364413,unit='deg')
 west = SkyCoord(175.68837814,15.45566318,unit='deg')

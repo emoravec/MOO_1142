@@ -117,7 +117,7 @@ def plot_members_galdens_velocity(density_img, specz_members, velocity_range=(-3
     return density_img
 #######################################################################################################################
 # read in the galaxy density map
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/members')
+location = Path(__file__).resolve().parent
 galaxy_density_path = location / 'photz_MC1_cats/MOO_1142+1527_R2_galdens_scaled_IntPz_gt0.3.fits'
 galaxy_density_hdu = fits.open(galaxy_density_path)
 members = Table.read(location / 'photz_MC1_cats/MOO_1142_R2_photz_members_IntPzgt03.fits')

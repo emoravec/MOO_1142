@@ -15,6 +15,7 @@ import aplpy
 
 import numpy as np
 import scipy.ndimage
+from pathlib import Path
 
 # ------------------------------------------------------------
 dpi = 72.27*390.00/504.00
@@ -23,7 +24,7 @@ factorx = 0.60
 factory = 0.50
 figsize = (factorx*504.00/dpi,factory*504.00/dpi)
 # ------------------------------------------------------------
-location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/'
+location = f"{Path(__file__).resolve().parents[2]}/"
 
 # M2 images
 #mooinp = location+'M2/images/midas/2024-07-03_Kelvin_MOO_1142_2asp_pca0_qm2_fitel_0f070-to-49f9Hz_1p0rr_L_dt20_map_iter1.fits' # map with data from legacy projects (18B and 20A) and 23B from 23B and 24A

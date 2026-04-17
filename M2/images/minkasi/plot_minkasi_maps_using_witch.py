@@ -5,6 +5,7 @@ Created in 2024-07
 """
 import numpy as np
 import time
+from pathlib import Path
 from witch.plotting import plot_cluster
 print('Imports complete.')
 # ------------------ #
@@ -15,9 +16,9 @@ def plot_minkasi_maps(N,M,tod_class,save_path):
         for m in M:
             n_m_file_name = 'MOO_1142_'+tod_class+'_niter_'+str(n)+'_'+str(m)
             print(n_m_file_name)
-            cluster_fits_path = tod_class_path + n_m_file_name +'.fits'
+            cluster_fits_path = tod_class_path / f'{n_m_file_name}.fits'
             img = plot_cluster("MOOJ1142", 
-                               cluster_fits_path, 
+                               str(cluster_fits_path), 
                                ra=moo1142_ra, dec=moo1142_dec, 
                                pix_size = 3.0, 
                                radius = 3.0, 
@@ -25,12 +26,12 @@ def plot_minkasi_maps(N,M,tod_class,save_path):
                                ncontours=21, 
                                plot_r = False, 
                                units = "uK_cmb")
-            img.save(save_path + 'pdfs/witch_tool/' + n_m_file_name +'.pdf', format='pdf', dpi=300)
+            img.save(str(save_path / 'pdfs' / 'witch_tool' / f'{n_m_file_name}.pdf'), format='pdf', dpi=300)
 
 # ------------------ #
-location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/'
+location = Path(__file__).resolve().parent
 tod_class = 'good'
-tod_class_path = location + tod_class + '/'
+tod_class_path = location / tod_class
 N_array = [1,2,3,4,5]
 M_array = [1,5,15,25,50]
 # ------------------ #

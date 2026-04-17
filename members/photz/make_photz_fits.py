@@ -11,7 +11,7 @@ from astropy.coordinates import SkyCoord
 from astropy.table import Table
 from astropy import units as u
 # -------------------------------------------------------------------------------------------- #
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/members')
+location = Path(__file__).resolve().parent.parent
 
 def handle_row(row):
     # ID        RA            DEC           z      Mag    Int_Pz    Rad(')   Rank

@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 # -------------------------------------------------------------------------------------------- #
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/profile_fitting/compare_xray_sz')
+location = Path(__file__).resolve().parent
 
 def SZ_gNFW(r, P_0, r_s, alpha, beta, gamma):
     denominator = ((r / r_s) ** gamma) * (1 + (r / r_s) ** alpha) ** ((beta - gamma) / alpha)

@@ -18,7 +18,7 @@ from astropy import units as u
 from astropy.convolution import Gaussian2DKernel, convolve
 from astropy.io import fits
 # -------------------------------------------------------------------------------------------- #
-location = Path("/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/")
+location = Path(__file__).resolve().parent.parent
 xmm_image = location / "xray/images/XMM/XMM_comb-net-center.fits"
 xmm_output_dir = location / "xray/images/XMM/smoothed"
 m2_image = location / "M2/images/minkasi/2025-11_JackOS/cutouts/MOO_1142_signal_4p5_by_eye_ctr.fits"

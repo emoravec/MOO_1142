@@ -20,7 +20,6 @@ __pycache__/
 .DS_Store
 .vscode/
 
-
 gemini/
 HST/*.fits
 M2/TODs/

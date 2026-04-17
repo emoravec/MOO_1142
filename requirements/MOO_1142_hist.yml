@@ -1,0 +1,17 @@
+name: MOO_1142
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - ipdb
+  - matplotlib
+  - ipykernel
+  - python=3.12
+  - scipy
+  - pip
+  - pandas
+  - ipython
+  - astropy[version='>=7']
+  - dill
+  - corner
+  - palettable

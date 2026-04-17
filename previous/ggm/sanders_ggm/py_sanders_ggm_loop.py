@@ -1,6 +1,7 @@
 from gaussian_gradient_magnitude import run as run_sanders_ggm
+from pathlib import Path
 
-location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/'
+location = f"{Path(__file__).resolve().parents[3]}/"
 
 mooNet = location+'xray/images/XMM/XMM_comb-net-image.fits'
 mooNetCenter = location+'xray/images/XMM/XMM_comb-net-center.fits' 

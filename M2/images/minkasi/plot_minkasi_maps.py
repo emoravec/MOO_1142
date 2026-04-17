@@ -9,6 +9,7 @@ import matplotlib.pyplot as pyplot
 import numpy as np
 import os
 import time
+from pathlib import Path
 # -------------------------------------------------------------------------------------------- #
 # colormap parameters blue-orange colormap
 import matplotlib.cm as cm
@@ -26,11 +27,11 @@ def plot_minkasi_maps(N,M,tod_class,save_path):
         for m in M:
             n_m_file_name = 'MOO_1142_'+tod_class+'_niter_'+str(n)+'_'+str(m)
             print(n_m_file_name)
-            cluster_fits_path = tod_class_path + n_m_file_name +'.fits'
+            cluster_fits_path = tod_class_path / f'{n_m_file_name}.fits'
             # ------------------ #
             # basic figure properties
             fig = pyplot.figure(figsize=(5, 5))
-            img = aplpy.FITSFigure(cluster_fits_path, hdu=0, figure=fig, downsample=1, smooth=False, convention='calabretta')
+            img = aplpy.FITSFigure(str(cluster_fits_path), hdu=0, figure=fig, downsample=1, smooth=False, convention='calabretta')
             img.set_theme('publication')
             img.set_title(n_m_file_name)
 
@@ -60,12 +61,12 @@ def plot_minkasi_maps(N,M,tod_class,save_path):
             # clevels=[-250e-6, -200e-6, -150e-6, -100e-6, -50e-6, 0, 50e-6, 100e-6, 150e-6, 200e-6, 250e-6]
             # img.show_contour(cluster,colors="gray",levels=clevels, returnlevels=True,convention='calabretta',smooth=3)
 
-            img.save(save_path + 'pdfs/' + n_m_file_name +'.pdf', format='pdf', dpi=300)
+            img.save(str(save_path / 'pdfs' / f'{n_m_file_name}.pdf'), format='pdf', dpi=300)
 # ------------------ #
-location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/'
+location = Path(__file__).resolve().parent
 moo1142_ra, moo1142_dec = np.rad2deg([3.06642436, 0.26972541])
 tod_class = 'good'
-tod_class_path = location + tod_class + '/'
+tod_class_path = location / tod_class
 N_array = [1,2,3,4,5]
 M_array = [1,5,15,25,50]
 # ------------------ #

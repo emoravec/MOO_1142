@@ -1,0 +1,40 @@
+MOO_1142 path migration report
+Date: 2026-04-17
+Workspace root: /Users/emoravec/Documents/Research/MOO_1142
+Retired path removed: /Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142
+Verification status:
+- Exact-match search returned zero remaining matches
+- Editor diagnostics found no new syntax issues in edited files
+- One existing environment/import diagnostic remains in M2/images/minkasi/run_minkasi_moo1142.py: Import "minkasi.minkasi_all" could not be resolved
+
+Refactored Python scripts to derive local paths dynamically
+1. M2/images/minkasi/make_M2_cutouts.py
+2. M2/images/minkasi/plot_minkasi_maps.py
+3. M2/images/minkasi/plot_minkasi_maps_scaling.py
+4. M2/images/minkasi/plot_minkasi_maps_using_witch.py
+5. M2/images/minkasi/run_minkasi_moo1142.py
+6. M2/images/minkasi/2025-11_JackOS/plot_MOO_1142_M2_images.py
+7. members/plot_members_basic.py
+8. members/plot_members_galdens_velocity.py
+9. members/specz_velocity.py
+10. members/photz/make_photz_fits.py
+11. members/specz/convert_txt_to_fits.py
+12. members/photz_MC1_cats/get_MOO_1142_MC1_photz_members.py
+13. multi-wavelength_figures/MOO_1142_galdens_sz_xray.py
+14. multi-wavelength_figures/MOO_1142_multi-wavelenth_plots.py
+15. multi-wavelength_figures/MOO_1142_XMM_M2_gaussian_convolve.py
+16. multi-wavelength_figures/versions/MOO_1142_XMM_adapt_M2_aplpy_smooth.py
+17. proposals/Keck/make_figure_Keck.py
+18. Profile_fitting/compare_xray_sz/compare_xray_SZ_profiles.py
+19. Profile_fitting/compare_xray_sz/compare_xray_SZ_profiles_90CL.py
+20. previous/ggm/ggm_crit_radius.py
+21. previous/ggm/ggm_filter.py
+22. previous/ggm/ggm_filter_example.py
+23. previous/ggm/ggm_filter_cutout.py
+24. previous/ggm/make_ggm_gif.py
+25. previous/ggm/sanders_ggm/py_sanders_ggm_loop.py
+26. gemini/isolate_gemini_sci_extension.py
+
+Literal replacement only or comment-only updates
+1. multi-wavelength_figures/MOO_1142_XMM_M2.py
+2. previous/ggm/sanders_ggm/zsh_ggm_loop

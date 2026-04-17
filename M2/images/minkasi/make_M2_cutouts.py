@@ -11,9 +11,9 @@ from astropy.wcs import WCS
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/')
+location = Path(__file__).resolve().parent
 
-# image center - from /Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/profile_fitting/XMM/XMM_fit_coords_EBarbavara.txt
+# image center - from /Users/emoravec/Documents/Research/MOO_1142/profile_fitting/XMM/XMM_fit_coords_EBarbavara.txt
 # which is Eleonora's fit to the main and west subcluster
 main = SkyCoord(175.69766238,15.45364413,unit='deg')
 west = SkyCoord(175.68837814,15.45566318,unit='deg')

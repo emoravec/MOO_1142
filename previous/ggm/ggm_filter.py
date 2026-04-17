@@ -8,6 +8,7 @@ import aplpy
 
 import numpy as np
 import scipy.ndimage
+from pathlib import Path
 
 # ------------------------------------------------------------
 
@@ -23,7 +24,7 @@ mspan = True
 clean = True
 
 # ------------------------------------------------------------
-location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/'
+location = f"{Path(__file__).resolve().parents[2]}/"
 
 # M2 images
 #mooinp = location+'ggm/M2_luca/data/MOOJ1142_snr_no_pnt_src.fits'

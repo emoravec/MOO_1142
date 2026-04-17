@@ -14,12 +14,12 @@ import aplpy
 from astropy import units as u
 from astropy.coordinates import SkyCoord
 # -------------------------------------------------------------------------------------------- #
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/2025-11_JackOS/')
+location = Path(__file__).resolve().parent
 m2_sig = location / "cutouts/smoothed/MOO_1142_signal_4p5_by_eye_ctr_smoothed_10arcsec.fits"
 m2_ps_sub = location / "cutouts/smoothed/MOO_1142_PS_sub_4p5_by_eye_ctr_smoothed_10arcsec.fits"
 
 # Image centers
-# from /Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/profile_fitting/XMM/XMM_fit_coords_EBarbavara.txt
+# from /Users/emoravec/Documents/Research/MOO_1142/profile_fitting/XMM/XMM_fit_coords_EBarbavara.txt
 # which is Eleonora's fit to the main and west subcluster
 main_cluster = SkyCoord(175.69766238,15.45364413,unit='deg')
 west_cluster = SkyCoord(175.68837814,15.45566318,unit='deg')

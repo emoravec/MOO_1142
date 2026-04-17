@@ -8,11 +8,12 @@ from astropy import units as u
 import aplpy
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
 # ------------------------------------------------------------
 plt.rcParams.update({'font.size': 14})
 
 cen = SkyCoord(175.6909647,15.4551255,unit='deg')
-location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/'
+location = f"{Path(__file__).resolve().parents[2]}/"
 # ------------------------------------------------------------
 def plot_ggm(input_image):
     hdu = fits.open(input_image)

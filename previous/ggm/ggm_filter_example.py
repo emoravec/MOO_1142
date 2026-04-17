@@ -8,6 +8,7 @@ import aplpy
 
 import numpy as np
 import scipy.ndimage
+from pathlib import Path
 
 # ------------------------------------------------------------
 
@@ -23,7 +24,7 @@ mspan = True
 clean = True
 
 # ------------------------------------------------------------
-location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/'
+location = f"{Path(__file__).resolve().parents[2]}/"
 mooinp = location+'M2/images/MOO_1142_M2_self-cal_map.fits'
 
 moohdu = fits.open(mooinp)

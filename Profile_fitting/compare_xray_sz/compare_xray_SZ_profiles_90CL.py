@@ -29,7 +29,7 @@ import numpy.random._pickle as numpy_random_pickle  # A: added here to patch num
 
 
 # -------------------------------------------------------------------------------------------- #
-location = Path("/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/profile_fitting/compare_xray_sz")  # C line 18: same working directory as the original comparison script.
+location = Path(__file__).resolve().parent  # C line 18: same working directory as the original comparison script.
 xmm_fit_dir = location.parent / "XMM/Barbavara_fit_2026-04"  # A: added here to point from the comparison-script folder to the XMM fit folder.
 xmm_state_path = xmm_fit_dir / "gnfw_circ+beta_circ_acfixed_NESTED/pmc_final.state"  # A: added here to load the saved posterior instead of reading XMM CSV best fits.
 

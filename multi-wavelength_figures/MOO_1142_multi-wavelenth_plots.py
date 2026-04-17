@@ -32,7 +32,7 @@ cmap = 'OrangeBlue'
 moo1142_cen = SkyCoord(175.6909647,15.4551255,unit='deg')
 # -------------------------------------------------------------------------------------------- #
 # files
-location = Path('/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/')
+location = Path(__file__).resolve().parent.parent
 M2_image_path = location / 'M2/images/midas/2024-07-03_Kelvin_MOO_1142_2asp_pca0_qm2_fitel_0f070-to-49f9Hz_1p0rr_L_dt20_snr_iter1.fits'
 XMM_image_path = location / 'xray/images/XMM/XMM_adapt-400-7200.fits'
 photz_member_smoothed_distribution_path = location / 'members/photz/MOO_1142.photz_wide_IntPz0.3_galdens.fits'

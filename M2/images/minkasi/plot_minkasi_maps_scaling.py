@@ -16,6 +16,7 @@ import matplotlib.pyplot as pyplot
 import numpy as np
 import os
 import time
+from pathlib import Path
 # -------------------------------------------------------------------------------------------- #
 # colormap parameters blue-orange colormap
 import matplotlib.cm as cm
@@ -45,7 +46,7 @@ def do_plotting(filename,fits_path,save_path):
     # ------------------ #
     # basic figure properties
     fig = pyplot.figure(figsize=(5, 5))
-    img = aplpy.FITSFigure(fits_path, figure=fig, downsample=1, smooth=False, convention='calabretta')
+    img = aplpy.FITSFigure(str(fits_path), figure=fig, downsample=1, smooth=False, convention='calabretta')
     img.set_theme('publication')
     img.set_title(filename)
 
@@ -72,12 +73,12 @@ def do_plotting(filename,fits_path,save_path):
     img.colorbar.set_width(0.12)
     img.colorbar.set_axis_label_text('K$_{rj}$') # minkasi maps are usually brightness temperature, K_rj (Tony M July 3rd, 2024 Slack)
 
-    img.save(save_path + 'pdfs/' + filename +'.pdf', format='pdf', dpi=300)
+    img.save(str(save_path / 'pdfs' / f'{filename}.pdf'), format='pdf', dpi=300)
 
 def plot_minkasi_maps(N,M,tod_class,save_path):
     # make initial image
     initial_filename = 'MOO_1142_'+tod_class+'_initial'
-    image_fits_path = tod_class_path + initial_filename +'.fits'
+    image_fits_path = tod_class_path / f'{initial_filename}.fits'
     do_plotting(initial_filename,image_fits_path,save_path)
 
     # plot iterations
@@ -85,13 +86,13 @@ def plot_minkasi_maps(N,M,tod_class,save_path):
         for m in M:
             # read in file and image properties
             n_m_file_name = 'MOO_1142_'+tod_class+'_niter_'+str(n)+'_'+str(m)
-            image_fits_path = tod_class_path + n_m_file_name +'.fits'
+            image_fits_path = tod_class_path / f'{n_m_file_name}.fits'
             do_plotting(n_m_file_name,image_fits_path,save_path)
 
 # ------------------ #
-location = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/M2/images/minkasi/'
+location = Path(__file__).resolve().parent
 tod_class = 'good'
-tod_class_path = location + tod_class + '/'
+tod_class_path = location / tod_class
 N_array = [1,2,3,4,5]
 M_array = [1,5,15,25,50]
 # ------------------ #

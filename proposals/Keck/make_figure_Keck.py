@@ -33,6 +33,7 @@ chandra_img_values = Table.read(location / 'tables/Chandra_sample/Chandra_min_ma
 chandra_img_values.add_index('Name')
 
 location = Path('/Users/emoravec/Documents/Research/merging_clusters/')
+moo1142_root = Path(__file__).resolve().parents[2]
 # ------------------------------------------------------------------------------------------- #
 def get_opt_ir_data(cluster):
     # get smoothed density distribution
@@ -102,14 +103,14 @@ def make_keck_plot(hdu,coord_array,specz_coord_array,cluster,image_size):
     levels = density_img.show_contour(xray_img,returnlevels=True,levels=xray_contour_levels,smooth=1,colors='black',linestyles='-',linewidths=1,zorder=1)
 
     # save plot
-    plt.savefig(f'/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/proposals/Keck/{cluster}_opt-ir-dist_Chandra_contours_vst.pdf',format='pdf',dpi=300)
+    plt.savefig(moo1142_root / f'proposals/Keck/{cluster}_opt-ir-dist_Chandra_contours_vst.pdf',format='pdf',dpi=300)
 # ------------------------------------------------------------------------------------------- #
 cluster_info = Table.read(location / 'tables/high_z/vla21b_sample_MC.csv',format='ascii.csv')
 cluster_info.add_index('Name')
 c = 'MOO_1142+1527'
 
 hdu,member_coords= get_opt_ir_data(c)
-specz_table_path = '/Users/emoravec/Documents/Research/merging_clusters/analysis/MOO_1142/members/MOO_1142+1527.specz_members.28aug23.fits'
+specz_table_path = moo1142_root / 'members/MOO_1142+1527.specz_members.28aug23.fits'
 specz_members = Table.read(specz_table_path)
 specz_member_coords = np.array([specz_members['RA'], specz_members['Dec']]).T
 
