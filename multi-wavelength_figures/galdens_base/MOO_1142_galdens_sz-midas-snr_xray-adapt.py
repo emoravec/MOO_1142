@@ -11,7 +11,6 @@ from palettable.cartocolors.sequential import Mint_7 as pal4
 cmap = pal4.mpl_colormap
 #######################################################################################################################
 import numpy as np
-import pandas as pd
 from pathlib import Path
 
 from astropy.io import fits
@@ -80,7 +79,7 @@ density_img = plot_galdens_basic(hdu=galaxy_density_hdu,
 density_img.show_markers(175.69784, 15.45318, coords_frame='world', s=100, marker='*', facecolor='none', edgecolor='yellow', linewidth=1)
 
 ### X-ray Contours
-xmm_img = location / 'xray/images/XMM/XMM_adapt-400-7200.fits'
+xmm_img = location / 'xray/images/XMM/smoothed/XMM_adapt-400-7200.fits'
 xmm_contour_levels = make_xray_contour_levels_log(10,320)
 xmm_levels = density_img.show_contour(str(xmm_img),returnlevels=True,levels=xmm_contour_levels,smooth=1,colors='black',linestyles='-',linewidths=1,zorder=1)
 
@@ -89,4 +88,5 @@ m2_img = location / 'M2/images/midas/2024-07-03_Kelvin_MOO_1142_2asp_pca0_qm2_fi
 m2_contour_levels = np.array([-25,-20,-15,-10,-5,-3,3,5,10])
 m2_levels = density_img.show_contour(str(m2_img),returnlevels=True,levels=m2_contour_levels,smooth=1,colors='red',linestyles='--',linewidths=1,zorder=1)
 
-plt.savefig(location / 'multi-wavelength_figures/galdens_base/MOO_1142+1527_galdens_xmm_m2-pt-src.png',format='png',dpi=300)
+#plt.savefig(location / 'multi-wavelength_figures/galdens_base/MOO_1142+1527_galdens_xmm_m2-pt-src.png',format='png',dpi=300)
+plt.show()

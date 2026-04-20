@@ -5,6 +5,9 @@
 		}
 	],
 	"settings": {
+		"python.defaultInterpreterPath": "/Users/emoravec/opt/anaconda3/envs/MOO_1142/bin/python",
+		"python.terminal.activateEnvironment": true,
+		"python.condaPath": "/Users/emoravec/opt/anaconda3/bin/conda",
 		"python-envs.defaultEnvManager": "ms-python.python:conda",
 		"python-envs.defaultPackageManager": "ms-python.python:conda"
 	}

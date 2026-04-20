@@ -9,9 +9,9 @@ Created in 2026-04.
 from __future__ import annotations  # A: added here for modern type hints; not taken from either source file.
 
 # Provenance shorthand used below:
-# C = adapted from compare_xray_SZ_profiles.py.
-# N = adapted from radial_profile_and_uncert_n.ipynb.
-# A = added here while turning the comparison into a standalone 90% CL script.
+# C = adapted from compare_xray_SZ_profiles.py written by Emily Moravec.
+# N = adapted from radial_profile_and_uncert_n.ipynb writted by Eleonora Barbavara.
+# A = added here while turning the comparison into a standalone 90% CL script written with Co-pilot.
 
 import builtins  # A: added here so dill can load the saved pocoMC state outside the original notebook session.
 import sys  # A: added here for the __builtin__ compatibility shim used during state loading.
@@ -24,46 +24,39 @@ import dill  # A: added here to deserialize pmc_final.state directly.
 import matplotlib.pyplot as plt  # C line 12 and N line 12: same plotting library used in both source files.
 import numpy as np  # C line 14 and N line 11: same array library used in both source files.
 import pandas as pd  # C line 15: same CSV-reading library as the original comparison script.
-import scipy.special  # N line 18: needed for the west-subcluster isobeta normalization from the notebook.
+import scipy.special  # N line 18: the notebook imports scipy there, and this script uses scipy.special for the west-subcluster isobeta normalization.
 import numpy.random._pickle as numpy_random_pickle  # A: added here to patch numpy RNG pickles when loading the saved state.
-
-
 # -------------------------------------------------------------------------------------------- #
-location = Path(__file__).resolve().parent  # C line 18: same working directory as the original comparison script.
+location = Path(__file__).resolve().parent 
 xmm_fit_dir = location.parent / "XMM/Barbavara_fit_2026-04"  # A: added here to point from the comparison-script folder to the XMM fit folder.
 xmm_state_path = xmm_fit_dir / "gnfw_circ+beta_circ_acfixed_NESTED/pmc_final.state"  # A: added here to load the saved posterior instead of reading XMM CSV best fits.
 
-PROFILE_SAMPLE_COUNT = 1000  # N lines 301 and 332: notebook builds both pressure-profile ensembles from 1000 posterior samples.
+PROFILE_SAMPLE_COUNT = 1000  # N lines 264 and 283: notebook builds both pressure-profile ensembles from 1000 posterior samples.
 R_SZ = np.arange(0.1, 100.0, 0.1)  # C line 33 with A tweak: same 0-100 arcsec plotting idea as the original script, but starts at 0.1 to avoid log(0).
-R_XMM = np.arange(0.1, 100.0, 0.1)  # A informed by C line 33 and N line 292: use an arcsec grid and extend it to the same plotting range as the original script.
+R_XMM = np.arange(0.1, 100.0, 0.1)  # A informed by C line 33 and N line 258: use an arcsec grid and extend it to the same plotting range as the original script.
 
-ALPHA_MAIN = 2.26  # N line 193: same fixed main-cluster alpha used in the XMM notebook fit setup.
-GAMMA_MAIN = 0.465  # N line 194: same fixed main-cluster gamma used in the XMM notebook fit setup.
-F_S_MAIN = 1.632e4  # N line 297: same main-cluster normalization factor used when turning A_main into density/pressure.
-F_S_SUB = 2.597e5  # N line 328: same west-subcluster normalization factor used in the notebook.
-KT_MAIN_KEV = 6.76  # N line 298: same main-cluster temperature used to convert density to pressure.
-KT_SUB_KEV = 7.13  # N line 329: same west-subcluster temperature used to convert density to pressure.
+ALPHA_MAIN = 2.26  # N line 180: same fixed main-cluster alpha used in the XMM notebook fit setup.
+GAMMA_MAIN = 0.465  # N line 181: same fixed main-cluster gamma used in the XMM notebook fit setup.
+F_S_MAIN = 1.632e4  # N line 260: same main-cluster normalization factor used when turning A_main into density/pressure.
+F_S_SUB = 2.597e5  # N line 279: same west-subcluster normalization factor used in the notebook.
+KT_MAIN_KEV = 6.76  # N line 261: same main-cluster temperature used to convert density to pressure.
+KT_SUB_KEV = 7.13  # N line 280: same west-subcluster temperature used to convert density to pressure.
 XMM_PIXEL_SCALE_ARCSEC = 2.5  # A from config_MOO1142.yaml line 29: added here to convert posterior radii from pixels to arcsec.
 # -------------------------------------------------------------------------------------------- #
-
-
 def SZ_gNFW(r: np.ndarray, p_0: float, r_s: float, alpha: float, beta: float, gamma: float) -> np.ndarray:
 	# C lines 20-22: same SZ gNFW expression as the original comparison script, with only naming/typing cleaned up here.
 	denominator = ((r / r_s) ** gamma) * (1 + (r / r_s) ** alpha) ** ((beta - gamma) / alpha)
 	return p_0 / denominator
 
-
 def Xray_gNFW(r: np.ndarray, p_0: float, r_s: float, alpha: float, beta: float, gamma: float) -> np.ndarray:
-	# C lines 24-26 and N line 286: same gNFW profile form used by both the original script and the notebook.
+	# C lines 24-26 and N line 252: same gNFW profile form used by both the original script and the notebook.
 	expression = ((r / r_s) ** -gamma) * (1 + (r / r_s) ** alpha) ** ((gamma - beta) / alpha)
 	return p_0 * expression
 
-
 def iso_beta(r: np.ndarray, p_0: float, r_c: float, beta: float) -> np.ndarray:
-	# C lines 28-30 and N line 289: same isobeta profile form used by both the original script and the notebook.
+	# C lines 28-30 and N line 255: same isobeta profile form used by both the original script and the notebook.
 	expression = (1 + (r / r_c) ** 2) ** (-1.5 * beta)
 	return p_0 * expression
-
 
 def load_xmm_state(state_path: Path) -> dict:
 	# A: this whole helper was added here because the notebook used sampler.posterior() live, while this script loads pmc_final.state directly.
@@ -91,7 +84,6 @@ def load_xmm_state(state_path: Path) -> dict:
 		numpy_random_pickle.__randomstate_ctor = original_randomstate_ctor
 		numpy_random_pickle.__bit_generator_ctor = original_bitgen_ctor
 
-
 def get_xmm_posterior_samples(state_path: Path, sample_count: int) -> np.ndarray:
 	# A with N context: the notebook used sampler.posterior() directly, so this helper recreates that posterior sample access from the saved state.
 	"""Return the tail of the saved posterior samples used for the notebook profiles."""
@@ -99,15 +91,14 @@ def get_xmm_posterior_samples(state_path: Path, sample_count: int) -> np.ndarray
 	samples = state["particles"].get("x", flat=True)  # A: this is how the flattened posterior chain is exposed inside the saved state.
 	return samples[-sample_count:]  # A chosen to mirror the notebook's 1000-sample pressure-profile construction as closely as possible.
 
-
 def compute_xmm_pressure_profiles(samples: np.ndarray, r_vals: np.ndarray) -> dict[str, np.ndarray]:
-	# N lines 297-340: this helper is the script form of the notebook's main/west pressure-profile loops.
+	# N lines 260-289: this helper is the script form of the notebook's main/west pressure-profile loops.
 	"""Build the XMM median and 90% interval pressure profiles for both subclusters."""
-	p_profiles_main = []  # N lines 300 and 304-309: same list-then-percentile pattern used for the main-cluster pressure profiles.
-	p_profiles_sub = []  # N lines 331 and 335-340: same list-then-percentile pattern used for the west-subcluster pressure profiles.
+	p_profiles_main = []  # N lines 263 and 266-270: same list-then-percentile pattern used for the main-cluster pressure profiles.
+	p_profiles_sub = []  # N lines 282 and 285-289: same list-then-percentile pattern used for the west-subcluster pressure profiles.
 
 	for sample in samples:
-		# N lines 303 and 334: keep the notebook's posterior parameter order when unpacking each sample.
+		# N lines 265 and 284: keep the notebook's posterior parameter order when unpacking each sample.
 		(
 			x_main_mcmc,
 			y_main_mcmc,
@@ -122,7 +113,7 @@ def compute_xmm_pressure_profiles(samples: np.ndarray, r_vals: np.ndarray) -> di
 			a_bkg_mcmc,
 		) = sample
 
-		# N line 305 supplies the pressure normalization and beta/2 usage; A adds the pixel-to-arcsec correction for r_s.
+		# N line 266 supplies the pressure normalization and beta/2 usage; A adds the pixel-to-arcsec correction for r_s.
 		main_profile = Xray_gNFW(
 			r=r_vals,
 			p_0=np.sqrt(a_main_mcmc / F_S_MAIN) * KT_MAIN_KEV,
@@ -131,7 +122,7 @@ def compute_xmm_pressure_profiles(samples: np.ndarray, r_vals: np.ndarray) -> di
 			beta=beta_main_mcmc / 2.0,
 			gamma=GAMMA_MAIN,
 		)
-		# N line 336 supplies the west-subcluster normalization; A adds the pixel-to-arcsec correction for r_c.
+		# N line 285 supplies the west-subcluster normalization; A adds the pixel-to-arcsec correction for r_c.
 		sub_profile = iso_beta(
 			r=r_vals,
 			p_0=np.sqrt(
@@ -143,10 +134,10 @@ def compute_xmm_pressure_profiles(samples: np.ndarray, r_vals: np.ndarray) -> di
 			beta=beta_sub_mcmc,
 		)
 
-		p_profiles_main.append(main_profile)  # N lines 307-309 condensed into a standalone-script pressure-profile list.
-		p_profiles_sub.append(sub_profile)  # N lines 338-340 condensed into a standalone-script pressure-profile list.
+		p_profiles_main.append(main_profile)  # N lines 266-268 condensed into a standalone-script pressure-profile list.
+		p_profiles_sub.append(sub_profile)  # N lines 285-287 condensed into a standalone-script pressure-profile list.
 
-	# N lines 309 and 340: use the same [5, 50, 95] percentile summary as the notebook plots.
+	# N lines 270 and 289: use the same [5, 50, 95] percentile summary as the notebook plots.
 	p_p5_main, p_p50_main, p_p95_main = np.percentile(p_profiles_main, [5, 50, 95], axis=0)
 	p_p5_sub, p_p50_sub, p_p95_sub = np.percentile(p_profiles_sub, [5, 50, 95], axis=0)
 	return {
@@ -195,7 +186,7 @@ def main() -> None:
 		beta=sub_sz_params["beta"].values[0],
 	)
 
-	# N lines 297-340 plus A state-loading helpers: replace the single CSV XMM curves with posterior median and 90% interval curves.
+	# N lines 260-289 plus A state-loading helpers: replace the single CSV XMM curves with posterior median and 90% interval curves.
 	xmm_samples = get_xmm_posterior_samples(xmm_state_path, PROFILE_SAMPLE_COUNT)
 	xmm_profiles = compute_xmm_pressure_profiles(xmm_samples, R_XMM)
 
