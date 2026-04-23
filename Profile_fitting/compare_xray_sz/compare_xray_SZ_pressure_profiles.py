@@ -113,5 +113,5 @@ ax2_top.set_xticks([100, 200, 300, 400, 500, 600, 700])
 ax2_top.set_xticklabels(['100', '200', '300', '400', '500', '600', '700'])
 
 plt.tight_layout()
-plt.savefig(location / 'plots/MOO_1142_main+west_sz_xray_profiles.png', dpi=300)
+plt.savefig(location / 'plots/pressure/MOO_1142_main+west_pressure_profiles.png', dpi=300)
 #plt.show()

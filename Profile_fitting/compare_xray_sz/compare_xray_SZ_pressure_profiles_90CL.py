@@ -151,13 +151,25 @@ def compute_xmm_pressure_profiles(samples: np.ndarray, r_vals: np.ndarray) -> di
 	}
 
 
-def format_radius_axes(axis: plt.Axes, kpc_per_arcsec: float) -> None:
+def format_radius_axes(
+	axis: plt.Axes,
+	kpc_per_arcsec: float,
+	*,
+	hide_leftmost_label: bool = False,
+	hide_rightmost_label: bool = False,
+) -> None:
 	# C lines 79-93 and 99-113: this helper factors out the repeated axis-formatting code from the original two-panel script.
 	"""Apply the shared arcsec and kpc radius axis formatting."""
+	bottom_tick_labels = ["10", "20", "30", "40", "50", "60", "70", "80", "90"]
+	if hide_leftmost_label:
+		bottom_tick_labels[0] = ""
+	if hide_rightmost_label:
+		bottom_tick_labels[-1] = ""
+
 	axis.set_xlim(10, 90)  # C lines 79 and 99: same x-range as the original comparison figure.
 	axis.set_xlabel('r (")')  # C lines 80 and 100: same arcsec x-axis label.
 	axis.set_xticks([10, 20, 30, 40, 50, 60, 70, 80, 90])  # C lines 84 and 104: same major tick locations.
-	axis.set_xticklabels(["10", "20", "30", "40", "50", "60", "70", "80", "90"])  # C lines 85 and 105: same tick labels.
+	axis.set_xticklabels(bottom_tick_labels)  # A: allow seam labels to be hidden where the two panels touch.
 
 	# C lines 88-91 and 108-111: same secondary kpc axis, just wrapped in a helper here.
 	axis_top = axis.secondary_xaxis("top", functions=(lambda x: x * kpc_per_arcsec, lambda x: x / kpc_per_arcsec))
@@ -166,6 +178,19 @@ def format_radius_axes(axis: plt.Axes, kpc_per_arcsec: float) -> None:
 	axis_top.set_xticklabels(["100", "200", "300", "400", "500", "600", "700"])
 
 
+def format_shared_pressure_axes(left_axis: plt.Axes, right_axis: plt.Axes) -> None:
+	# A: place the shared pressure axis between the panels and mirror y ticks on the outer right edge.
+	"""Apply the shared log-pressure axis styling for the two-panel figure."""
+	left_axis.set_ylim(1e-7, 1e0)
+	left_axis.set_ylabel("P (keV cm$^{-3}$)")
+	left_axis.set_zorder(2)
+	left_axis.patch.set_visible(False)
+	left_axis.tick_params(axis="y", which="both", left=True, labelleft=True, right=True, labelright=False)
+
+	right_axis.yaxis.tick_right()
+	right_axis.tick_params(axis="y", which="both", left=False, labelleft=False, right=True, labelright=True)
+	right_axis.spines["left"].set_visible(False)
+# -------------------------------------------------------------------------------------------- #
 def main() -> None:
 	# C lines 37-58: keep the SZ side exactly as in the original comparison script.
 	main_sz_params = pd.read_csv(location / "parameter_files/main_cluster_gNFW_sz.csv")
@@ -190,7 +215,7 @@ def main() -> None:
 	xmm_samples = get_xmm_posterior_samples(xmm_state_path, PROFILE_SAMPLE_COUNT)
 	xmm_profiles = compute_xmm_pressure_profiles(xmm_samples, R_XMM)
 
-	fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))  # C line 69: same two-panel figure layout as the original script.
+	fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5), sharey=True, gridspec_kw={"wspace": 0.0})  # A: share y-scaling and let the center spine act as the common pressure axis.
 
 	z = 1.189  # C line 72: same adopted MOO 1142 redshift as the original comparison plot.
 	kpc_per_arcsec = Planck18.kpc_proper_per_arcmin(z).to(u.kpc / u.arcsec).value  # C line 73: same kpc/arcsec conversion.
@@ -200,22 +225,21 @@ def main() -> None:
 	ax1.loglog(R_SZ, main_cluster_sz_profile, c="blue", label="M2")
 	ax1.loglog(R_XMM, xmm_profiles["P_p50_main"], c="red", label="XMM")
 	ax1.fill_between(R_XMM, xmm_profiles["P_p5_main"], xmm_profiles["P_p95_main"], color="red", alpha=0.3)
-	ax1.set_ylabel("P (keV cm$^{-3}$)")
 	ax1.legend()
-	format_radius_axes(ax1, kpc_per_arcsec)
+	format_radius_axes(ax1, kpc_per_arcsec, hide_rightmost_label=True)
 
 	# C line 96 and following: preserve the original west-panel layout, but again replace the single CSV XMM curve with posterior median and band.
 	ax2.set_title("West Subcluster Pressure Profile")
 	ax2.loglog(R_SZ, subcluster_sz_profile, c="blue", label="M2")
 	ax2.loglog(R_XMM, xmm_profiles["P_p50_sub"], c="red", label="XMM")
 	ax2.fill_between(R_XMM, xmm_profiles["P_p5_sub"], xmm_profiles["P_p95_sub"], color="red", alpha=0.3)
-	ax2.set_ylabel("P (keV cm$^{-3}$)")
 	ax2.legend()
 	format_radius_axes(ax2, kpc_per_arcsec)
+	format_shared_pressure_axes(ax1, ax2)
 
-	plt.tight_layout()  # C line 115: same final layout cleanup as the original script.
-	plt.savefig(location / "plots/MOO_1142_main+west_sz_xray_profiles_90CL.png", dpi=300)  # C line 116 with A filename change to distinguish the 90% CL output.
-
+	fig.subplots_adjust(wspace=0.0)  # A: keep the two panels flush so the shared y-axis sits between them.
+	plt.savefig(location / "plots/pressure/MOO_1142_main+west_sz_xray_profiles_90CL_shared.png", dpi=300)  # C line 116 with A filename change to distinguish the 90% CL output.
+	#plt.show()
 
 if __name__ == "__main__":
 	main()  # A: standard standalone-script entry point; the notebook did not need this wrapper.
