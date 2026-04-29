@@ -38,6 +38,9 @@ def entropy_profile(pressure_profile, density_profile):
     return pressure_profile / (density_profile ** (5/3))
 
 r = np.arange(0, 100, 0.1)  # radius in arcsec
+main_avg_spec_temp_keV = 6.76
+pos_avg_spec_temp_keV = main_avg_spec_temp_keV + 0.75
+neg_avg_spec_temp_keV = main_avg_spec_temp_keV - 0.54
 # -------------------------------------------------------------------------------------------- #
 ### MAIN CLUSTER ###
 # Create SZ pressure profile
@@ -86,15 +89,24 @@ fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 z = 1.189  # MOO 1142 biweight redshift
 kpc_per_arcsec = Planck18.kpc_proper_per_arcmin(z).to(u.kpc / u.arcsec).value
 
-# Plot kB Temperature profiles
-ax1.loglog(r, main_cluster_temperature_profile, c='navy', label='Main')
-ax1.loglog(r, subcluster_temperature_profile, c='darkorange', label='West')
+# Plot kB Temperature profile
+ax1.loglog(r, main_cluster_temperature_profile, c='k')
+# add average spectral temperature
+ax1.axhline(y=main_avg_spec_temp_keV, color='red', linestyle='--')
+ax1.axhspan(neg_avg_spec_temp_keV, pos_avg_spec_temp_keV, color='red', alpha=0.3)
+
+# Format x-axis
 ax1.set_xlim(10, 9e1)
 ax1.set_xlabel('r (")')
-ax1.set_ylim(10**0, 10**3)
+ax1.set_ylim(10**0, 10**1)
+ax1.set_yticks(np.arange(1, 11, 1))
+ax1.yaxis.set_major_formatter(FuncFormatter(lambda value, _: f'{value:g}'))
 ax1.set_ylabel('k$_{B}$ T$_{e}$ (keV)')
 ax1.tick_params(axis='y', which='both', right=True, labelright=False)
-ax1.legend()
+
+# misc plot properties
+ax1.set_title('Main Subcluster Temperature Profile')
+ax1.legend().remove()
 
 # Format x-axis labels as regular numbers
 ax1.set_xticks([10, 20, 30, 40, 50, 60, 70, 80, 90])
@@ -107,15 +119,19 @@ ax1_top.set_xlabel('r (kpc)')
 ax1_top.set_xticks([100, 200, 300, 400, 500, 600, 700])
 ax1_top.set_xticklabels(['100', '200', '300', '400', '500', '600', '700'])
 
-# Plot entropy profiles
-ax2.loglog(r, main_cluster_entropy_profile, c='navy', label='Main')
-ax2.loglog(r, subcluster_entropy_profile, c='darkorange', label='West')
+# Plot entropy profile
+ax2.loglog(r, main_cluster_entropy_profile, c='k')
+
+# Format x-axis
 ax2.set_xlim(10, 9e1)
 ax2.set_xlabel('r (")')
-ax2.set_ylim(10**1, 10**7)
+ax2.set_ylim(10**1, 10**3)
 ax2.set_ylabel('K (keV cm$^{-2}$)')
 ax2.tick_params(axis='y', which='both', right=True, labelright=False)
-ax2.legend()
+
+# misc plot properties
+ax2.legend().remove()
+ax2.set_title('Main Subcluster Entropy Profile')
 
 # Format x-axis labels as regular numbers
 ax2.set_xticks([10, 20, 30, 40, 50, 60, 70, 80, 90])
@@ -129,5 +145,5 @@ ax2_top.set_xticks([100, 200, 300, 400, 500, 600, 700])
 ax2_top.set_xticklabels(['100', '200', '300', '400', '500', '600', '700'])
 
 plt.tight_layout()
-plt.savefig(location / 'plots/MOO_1142_temp_entropy_profiles.png', dpi=300)
+plt.savefig(location / 'plots/MOO_1142_temp_entropy_profiles_main.png', dpi=300)
 #plt.show()

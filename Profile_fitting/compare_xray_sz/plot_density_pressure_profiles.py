@@ -181,7 +181,7 @@ def main() -> None:
 	z = 1.189
 	kpc_per_arcsec = Planck18.kpc_proper_per_arcmin(z).to(u.kpc / u.arcsec).value
 
-	ax1.set_title("Number Density Profiles")
+	ax1.set_title("X-ray inferred $n_e$ profiles")
 	ax1.loglog(R_XMM, xmm_profiles["n_main_p50"], c="navy", label="Main")
 	ax1.fill_between(R_XMM, xmm_profiles["n_main_p5"], xmm_profiles["n_main_p95"], color="navy", alpha=0.25)
 	ax1.loglog(R_XMM, xmm_profiles["n_sub_p50"], c="darkorange", label="West")
@@ -190,7 +190,7 @@ def main() -> None:
 	ax1.legend()
 	format_radius_axes(ax1, kpc_per_arcsec)
 
-	ax2.set_title("Pressure Profiles")
+	ax2.set_title("SZ inferred $P_e$ profiles")
 	ax2.loglog(R_SZ, main_cluster_sz_profile, c="navy", label="Main")
 	ax2.loglog(R_SZ, subcluster_sz_profile, c="darkorange", label="West")
 	ax2.set_ylabel("P (keV cm$^{-3}$)")
