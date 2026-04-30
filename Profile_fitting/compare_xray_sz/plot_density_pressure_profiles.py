@@ -186,14 +186,14 @@ def main() -> None:
 	ax1.fill_between(R_XMM, xmm_profiles["n_main_p5"], xmm_profiles["n_main_p95"], color="navy", alpha=0.25)
 	ax1.loglog(R_XMM, xmm_profiles["n_sub_p50"], c="darkorange", label="West")
 	ax1.fill_between(R_XMM, xmm_profiles["n_sub_p5"], xmm_profiles["n_sub_p95"], color="darkorange", alpha=0.25)
-	ax1.set_ylabel("n (cm$^{-3}$)")
+	ax1.set_ylabel("$n_e$ (cm$^{-3}$)")
 	ax1.legend()
 	format_radius_axes(ax1, kpc_per_arcsec)
 
 	ax2.set_title("SZ inferred $P_e$ profiles")
 	ax2.loglog(R_SZ, main_cluster_sz_profile, c="navy", label="Main")
 	ax2.loglog(R_SZ, subcluster_sz_profile, c="darkorange", label="West")
-	ax2.set_ylabel("P (keV cm$^{-3}$)")
+	ax2.set_ylabel("$P_e$ (keV cm$^{-3}$)")
 	ax2.legend()
 	format_radius_axes(ax2, kpc_per_arcsec)
 
