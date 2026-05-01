@@ -14,6 +14,7 @@ dependencies:
   - dill
   - corner
   - palettable
+  - pytest
   - pip:
     - aplpy==2.2.0
     - astropy==7.1.0

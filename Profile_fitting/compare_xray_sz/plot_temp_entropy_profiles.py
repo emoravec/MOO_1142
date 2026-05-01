@@ -14,20 +14,14 @@ from matplotlib.ticker import FuncFormatter
 import numpy as np
 import pandas as pd
 from pathlib import Path
+
+try:
+    from .profile_models import gNFW, iso_beta
+except ImportError:
+    from profile_models import gNFW, iso_beta
+
 # -------------------------------------------------------------------------------------------- #
 location = Path(__file__).resolve().parent
-
-def SZ_gNFW(r, P_0, r_s, alpha, beta, gamma):
-    denominator = ((r / r_s) ** gamma) * (1 + (r / r_s) ** alpha) ** ((beta - gamma) / alpha)
-    return P_0 / denominator
-
-def Xray_gNFW(r, n_0, r_s, alpha, beta, gamma):
-    expression = ((r / r_s) ** -gamma) * (1 + (r / r_s) ** alpha) ** ((gamma - beta) / alpha)
-    return n_0 * expression
-
-def iso_beta(r, c_0, r_c, beta):
-    expression = (1 + (r / r_c) ** 2) ** (-1.5*beta)
-    return c_0 * expression
 
 def kb_temperature_profile(pressure_profile, density_profile):
     """Calculate the temperature profile from the pressure and density profiles."""
@@ -45,20 +39,20 @@ neg_avg_spec_temp_keV = main_avg_spec_temp_keV - 0.54
 ### MAIN CLUSTER ###
 # Create SZ pressure profile
 main_sz_params = pd.read_csv(location / 'parameter_files/main_cluster_gNFW_sz.csv')
-main_cluster_sz_profile = SZ_gNFW(r = r,
-                                  P_0= main_sz_params['P_0'].values[0],
-                                  r_s = main_sz_params['r_s_arcsec'].values[0], 
-                                  alpha = main_sz_params['alpha'].values[0], 
-                                  beta = main_sz_params['beta'].values[0], 
-                                  gamma = main_sz_params['gamma'].values[0])
+main_cluster_sz_profile = gNFW(r = r,
+                               p_0= main_sz_params['P_0'].values[0],
+                               r_s = main_sz_params['r_s_arcsec'].values[0], 
+                               alpha = main_sz_params['alpha'].values[0], 
+                               beta = main_sz_params['beta'].values[0], 
+                               gamma = main_sz_params['gamma'].values[0])
 # Create X-ray density profile
 main_xray_params = pd.read_csv(location / 'parameter_files/main_cluster_gNFW_xray.csv')
-main_cluster_xray_profile = Xray_gNFW(r = r,
-                                  n_0= main_xray_params['n_s'].values[0],
-                                  r_s = main_xray_params['r_s_arcsec'].values[0], 
-                                  alpha = main_xray_params['alpha'].values[0], 
-                                  beta = main_xray_params['beta'].values[0], 
-                                  gamma = main_xray_params['gamma'].values[0])
+main_cluster_xray_profile = gNFW(r = r,
+                                 p_0= main_xray_params['n_s'].values[0],
+                                 r_s = main_xray_params['r_s_arcsec'].values[0], 
+                                 alpha = main_xray_params['alpha'].values[0], 
+                                 beta = main_xray_params['beta'].values[0], 
+                                 gamma = main_xray_params['gamma'].values[0])
 # Thermodynamic profiles for main cluster
 main_cluster_temperature_profile = kb_temperature_profile(main_cluster_sz_profile, main_cluster_xray_profile)
 main_cluster_entropy_profile = entropy_profile(main_cluster_sz_profile, main_cluster_xray_profile)
@@ -67,15 +61,15 @@ main_cluster_entropy_profile = entropy_profile(main_cluster_sz_profile, main_clu
 # Create SZ pressure profile
 sub_sz_params = pd.read_csv(location / 'parameter_files/subcluster_sph_isobeta_sz.csv')
 subcluster_sz_profile = iso_beta(r = r,
-                                 c_0= sub_sz_params['P_0'].values[0],
+                                                                 p_0= sub_sz_params['P_0'].values[0],
                                  r_c = sub_sz_params['r_c_arcsec'].values[0], 
                                  beta = sub_sz_params['beta'].values[0])
 # Create X-ray density profile
 sub_xray_params = pd.read_csv(location / 'parameter_files/subcluster_sph_isobeta_xray.csv')
 subcluster_xray_profile = iso_beta(r = r,
-                                 c_0= sub_xray_params['n_0'].values[0],
-                                 r_c = sub_xray_params['r_c_arcsec'].values[0], 
-                                 beta = sub_xray_params['beta'].values[0])
+                                                                     p_0= sub_xray_params['n_0'].values[0],
+                                                                     r_c = sub_xray_params['r_c_arcsec'].values[0], 
+                                                                     beta = sub_xray_params['beta'].values[0])
 
 # Thermodynamic profiles for subcluster
 subcluster_temperature_profile = kb_temperature_profile(subcluster_sz_profile, subcluster_xray_profile)

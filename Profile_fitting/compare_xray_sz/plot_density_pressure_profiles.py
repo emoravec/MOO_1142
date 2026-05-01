@@ -21,6 +21,12 @@ import numpy as np
 import pandas as pd
 import scipy.special
 import numpy.random._pickle as numpy_random_pickle
+
+try:
+	from .profile_models import gNFW, iso_beta
+except ImportError:
+	from profile_models import gNFW, iso_beta
+
 # -------------------------------------------------------------------------------------------- #
 location = Path(__file__).resolve().parent
 xmm_fit_dir = location.parent / "XMM/Barbavara_fit_2026-04"
@@ -38,21 +44,6 @@ KT_MAIN_KEV = 6.76
 KT_SUB_KEV = 7.13
 XMM_PIXEL_SCALE_ARCSEC = 2.5
 # -------------------------------------------------------------------------------------------- #
-def SZ_gNFW(r: np.ndarray, p_0: float, r_s: float, alpha: float, beta: float, gamma: float) -> np.ndarray:
-	denominator = ((r / r_s) ** gamma) * (1 + (r / r_s) ** alpha) ** ((beta - gamma) / alpha)
-	return p_0 / denominator
-
-
-def Xray_gNFW(r: np.ndarray, n_0: float, r_s: float, alpha: float, beta: float, gamma: float) -> np.ndarray:
-	expression = ((r / r_s) ** -gamma) * (1 + (r / r_s) ** alpha) ** ((gamma - beta) / alpha)
-	return n_0 * expression
-
-
-def iso_beta(r: np.ndarray, c_0: float, r_c: float, beta: float) -> np.ndarray:
-	expression = (1 + (r / r_c) ** 2) ** (-1.5 * beta)
-	return c_0 * expression
-
-
 def load_xmm_state(state_path: Path) -> Dict:
 	"""Load the saved pocoMC state with compatibility shims for this environment."""
 	sys.modules["__builtin__"] = builtins
@@ -117,9 +108,9 @@ def compute_xmm_density_profiles(samples: np.ndarray, r_vals: np.ndarray) -> Dic
 			/ (F_S_SUB * scipy.special.gamma(3.0 * beta_sub_mcmc - 0.5))
 		)
 
-		main_profile_density = Xray_gNFW(
+		main_profile_density = gNFW(
 			r=r_vals,
-			n_0=main_n_0,
+			p_0=main_n_0,
 			r_s=rs_main_mcmc * XMM_PIXEL_SCALE_ARCSEC,
 			alpha=ALPHA_MAIN,
 			beta=beta_main_mcmc / 2.0,
@@ -128,7 +119,7 @@ def compute_xmm_density_profiles(samples: np.ndarray, r_vals: np.ndarray) -> Dic
 
 		sub_profile_density = iso_beta(
 			r=r_vals,
-			c_0=sub_n_0,
+			p_0=sub_n_0,
 			r_c=rc_sub_mcmc * XMM_PIXEL_SCALE_ARCSEC,
 			beta=beta_sub_mcmc,
 		)
@@ -156,7 +147,7 @@ def format_radius_axes(axis: plt.Axes, kpc_per_arcsec: float) -> None:
 # -------------------------------------------------------------------------------------------- #
 def main() -> None:
 	main_sz_params = pd.read_csv(location / "parameter_files/main_cluster_gNFW_sz.csv")
-	main_cluster_sz_profile = SZ_gNFW(
+	main_cluster_sz_profile = gNFW(
 		r=R_SZ,
 		p_0=main_sz_params["P_0"].values[0],
 		r_s=main_sz_params["r_s_arcsec"].values[0],
@@ -168,7 +159,7 @@ def main() -> None:
 	sub_sz_params = pd.read_csv(location / "parameter_files/subcluster_sph_isobeta_sz.csv")
 	subcluster_sz_profile = iso_beta(
 		r=R_SZ,
-		c_0=sub_sz_params["P_0"].values[0],
+		p_0=sub_sz_params["P_0"].values[0],
 		r_c=sub_sz_params["r_c_arcsec"].values[0],
 		beta=sub_sz_params["beta"].values[0],
 	)
