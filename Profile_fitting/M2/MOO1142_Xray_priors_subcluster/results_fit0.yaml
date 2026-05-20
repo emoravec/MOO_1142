@@ -1,0 +1,101 @@
+cluster_model:
+  structures:
+    gnfw_rs:
+      parameters:
+        P0:
+          to_fit: true
+          value:
+          - 1.4641140913761803
+        alpha:
+          to_fit: true
+          value:
+          - 1.4241589510868857
+        beta:
+          to_fit: true
+          value:
+          - 2.214710276578819
+        dx_1:
+          value:
+          - 0.0
+        dy_1:
+          value:
+          - 0.0
+        dz_1:
+          value:
+          - 0.0
+        gamma:
+          to_fit: true
+          value:
+          - -0.6660466055749629
+        r_s:
+          to_fit: true
+          value:
+          - 4.281301875660261
+        z:
+          value:
+          - 1.19
+      structure: gnfw_rs
+    sph_isobeta:
+      parameters:
+        amp:
+          priors:
+          - 0.0
+          - 10.0
+          to_fit: true
+          value:
+          - 0.07194859620925675
+        beta:
+          priors:
+          - 0.0
+          - 10.0
+          to_fit: true
+          value:
+          - 1.314745351849895
+        r:
+          to_fit: true
+          value:
+          - 29.233368999278156
+        theta:
+          value:
+          - 0.0
+        x0:
+          to_fit: false
+          value:
+          - -33.423264
+        y0:
+          to_fit: false
+          value:
+          - 7.26858
+        z0:
+          value:
+          - 0.0
+      structure: sph_isobeta
+metamodel:
+  model_map:
+    mustang2:
+    - cluster_model
+    - ps_model
+  models:
+  - cluster_model
+  - ps_model
+ps_model:
+  structures:
+    ps_gauss:
+      parameters:
+        amp_g:
+          to_fit: true
+          value:
+          - 0.0015709172495926716
+        dx_g:
+          to_fit: true
+          value:
+          - 1.3350627614916843
+        dy_g:
+          to_fit: true
+          value:
+          - -3.22579380439938
+        sigma:
+          to_fit: true
+          value:
+          - 5.266079157870082
+      structure: gaussian

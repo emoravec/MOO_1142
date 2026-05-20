@@ -1,0 +1,152 @@
+cluster_model:
+  structures:
+    gnfw_rs:
+      parameters:
+        P0:
+          to_fit: true
+          value: 1.63
+        alpha:
+          to_fit: true
+          value: 2.26
+        beta:
+          to_fit: true
+          value: 2.05
+        dx_1:
+          value: 0.0
+        dy_1:
+          value: 0.0
+        dz_1:
+          value: 0.0
+        gamma:
+          to_fit: true
+          value: 0.465
+        r_s:
+          to_fit: true
+          value: 4.5
+        z:
+          value: 1.19
+      structure: gnfw_rs
+    sph_isobeta:
+      parameters:
+        amp:
+          priors:
+          - 0.0
+          - 10.0
+          to_fit: true
+          value: 0.05
+        beta:
+          priors:
+          - 0.0
+          - 10.0
+          to_fit: true
+          value: 2.56
+        r:
+          to_fit: true
+          value: 23.9
+        theta:
+          value: 0.0
+        x0:
+          to_fit: false
+          value: -33.423264
+        y0:
+          to_fit: false
+          value: 7.26858
+        z0:
+          value: 0.0
+      structure: sph_isobeta
+constants:
+  Te: 5.0
+  freq: 90e9
+  z: 1.19
+coords:
+  dr: '4.0'
+  dz: 4.0
+  r_map: 3.0*60
+  x0: (175.69766238*u.deg).to(u.radian).value
+  y0: (15.45364413*u.deg).to(u.radian).value
+datasets:
+  mustang2:
+    beam:
+      amp1: 0.9808
+      amp2: 0.0192
+      fwhm1: '9.735'
+      fwhm2: '32.627'
+    copy_noise: false
+    dograd: false
+    freq: float(90e9)
+    funcs:
+      get_files: mf.get_files
+      get_info: mf.get_info
+      load: mf.load_tods
+      load_tods: mf.load_tods
+      make_metadata: mf.make_metadata
+      postfit: mf.postfit
+      postproc: mf.postproc
+      preproc: mf.preproc
+    mask: 50
+    minkasi_noise:
+      args: '[]'
+      class: minkasi.mapmaking.noise.NoiseSmoothedSVD
+      kwargs: '{''fwhm'':10}'
+    noise:
+      args: '[]'
+      class: jn.NoiseSmoothedSVD
+      kwargs: '{''fwhm'':10}'
+    npass: 1
+    point_sources:
+    - ps_model
+    prefactor: float(wu.get_da(cfg['constants']['z'])*wu.y2K_RJ(90e9, cfg['constants']['Te'])*wu.XMpc/wu.me)
+fit: true
+fitting:
+  chitol: 1e-5
+  maxiter: 10
+imports:
+  astropy.coordinates:
+  - Angle
+  astropy.units: u
+  jitkasi.noise: jn
+  witch.external.minkasi.funcs: mf
+map: true
+mcmc:
+  n_leaps: 4
+  num_steps: 1000
+  run: false
+mem_starved: false
+metamodel:
+  model_map:
+    mustang2:
+    - cluster_model
+    - ps_model
+  models:
+  - cluster_model
+  - ps_model
+model_map: true
+n_rounds: 4
+name: MOOJ1142
+paths:
+  glob: Signal_TOD*.fits
+  ndo: false
+  odo: false
+  outroot: ''
+  subdir: xray_peak_rs_priors
+  tods: MOOJ1142
+ps_model:
+  structures:
+    ps_gauss:
+      parameters:
+        amp_g:
+          to_fit: true
+          value: 0.00128582673
+        dx_g:
+          to_fit: true
+          value: 1.91
+        dy_g:
+          to_fit: true
+          value: -4.04
+        sigma:
+          to_fit: true
+          value: 5.1
+      structure: gaussian
+sim: false
+sub: true
+wnoise: false

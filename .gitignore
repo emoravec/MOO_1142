@@ -29,3 +29,6 @@ M2/images/minkasi/remove_no/*.fits
 M2/images/minkasi/remove_no_maybe/*.fits
 MeerKat/
 
+Profile_fitting/M2/MOO1142_Xray_priors_subcluster/mustang2/
+Profile_fitting/M2/MOO1142_Xray_priors_subcluster/model/
+Profile_fitting/M2/MOO1142_Xray_priors_subcluster/checkpoints/
