@@ -59,8 +59,8 @@ by_eye_center = SkyCoord('11:42:46.45 15:27:12.38', unit=(u.hourangle,u.deg))
 RA_WIDTH = 4.0 * u.arcmin
 DEC_HEIGHT = 3.0 * u.arcmin
 # XMM adaptively smoothed image display parameters
-XMM_VMIN = 2E-6
-XMM_VMAX = 8E-5
+XMM_VMIN = 1.7E-6
+XMM_VMAX = 1.2E-4
 # M2 image display parameters
 # M2_VMIN = -0.0006 # native image with no smoothing: -0.0008
 # M2_VMAX = 6E-5 # native image with no smoothing: 0.0006
@@ -73,9 +73,13 @@ M2_CONTOUR_LEVELS_POS = make_contour_levels(start=5e-5, stop=2.5e-4, step=5e-5)
 bcg = SkyCoord(175.69784, 15.45318, unit='deg')
 
 # -------------------------------------------------------------------------------------------- #
-def style_panel(panel: aplpy.FITSFigure, show_y_axis: bool = True) -> None:
+def style_panel(
+	panel: aplpy.FITSFigure,
+	show_y_axis: bool = True,
+	tick_color: str = "black",
+) -> None:
 	"""Apply common styling to an APLpy panel."""
-	panel.ticks.set_color("black")
+	panel.ticks.set_color(tick_color)
 	panel.tick_labels.set_font(size=11)
 	panel.axis_labels.set_font(size=12)
 	panel.frame.set_color("black")
@@ -151,7 +155,7 @@ def main():
 	#left_panel.set_title("XMM (0.4-7.2 keV)")
 	left_panel.axis_labels.set_xtext("Right Ascension")
 	left_panel.axis_labels.set_ytext("Declination")
-	style_panel(left_panel)
+	style_panel(left_panel, tick_color="white")
 
 	# MUSTANG-2
 	right_panel = aplpy.FITSFigure(
@@ -205,7 +209,7 @@ def main():
 	show_points_of_interest(right_panel)
 
 	# Save/show plot
-	fig.savefig(output_dir / "MOO_1142_XMM_M2_PS_sub_contours_BCG.pdf", dpi=300, bbox_inches="tight")
+	fig.savefig(output_dir / "MOO_1142_XMM_M2_PS_contours_BCG.pdf", dpi=300, bbox_inches="tight")
 	#plt.show()
 
 if __name__ == "__main__":
