@@ -22,6 +22,7 @@ __pycache__/
 
 gemini/
 HST/*.fits
+LoTSS/
 M2/TODs/
 M2/images/minkasi/all/*.fits
 M2/images/minkasi/good/*.fits
