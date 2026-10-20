@@ -29,15 +29,18 @@
 
 * 2026-10
 	* Keck ground-based spectroscopy
-		* extra/2026-10-07.MOO_1142+1527.speczs.DW_combined.fits = 2026-06-29.MOO_1142+1527.speczs.from.all.public.redshifts.fits + the new redshifts that Delaney calculated.
-			* Made by Delaney White in october 2026. This has all the MOO 1142 redshifts from Adam and new redshifts from Delaney. The new redshifts are the ones with "source" == "Keck LRIS red". The rest are from the specz table going in the MC1 paper which I think was /Users/emoravec/Documents/Research/MaDCoWS/catalogs/specz/MC1_specz_programs/All.public.redshifts.29jun26.lst
-			* She said, "I have not removed any potential duplicates because I wasn't sure what threshold you all were interested in using. When I did a search for duplicates using a search radius of 1.5" it suggested 12 duplicates. Most seem to have redshifts in agreement, but those that don't generally have lower Q of 1 or 2 for both catalogs, so they may need to be removed when moving forward."
-			* moved this to the extra folder because not particularly useful as it is
-		* 2026-10-07.MOO_1142+1527.specz_dups.fits - Delaney cross matched all redshifts she had within 1.5" and got 12 matches = duplicates
 		* 2026-10-08.MOO_1142+1527.speczs.DW_all.8oct26.fits
 			* Made by Delaney White in october 2026. She reduced three new MOO 1142 masks and produced 43 redshifts. This is the full list of those redshifts with some extra columns I asked for (wanted it to be in the standard format that we plan to in the MC1 paper). 
+		* 2026-10-19.MOO_1142+1527.speczs.internal.groundBasedAll.fits
+			* Made by Delaney White. Table of 124 sources that is all the ground based spectroscopy - Adams internal list + all new Keck spectroscopy that Delaney reduced. This has the duplicates resolved. 
+			* There were X "duplicates" - original internal sources that had a match with Delaneys new catalog of 43 sources. Two "original" sources were matched with one of Delaney's new sources. The general procedure of resolving duplicates is as follows: We identified duplicates across catalogs by using a search radius of 1.5”. To determine which case to keep, we compared redshift values and the quality flag, “Q”, assigned to each source. For each duplicate case, we kept the redshift value that corresponded to the estimate that had a higher Q value. If cases had the same Q value, the latest estimate for the source redshift was used. We also estimated duplicates to have a significant redshift difference when $\delta z > 0.01 (1+z)$. Out of the 13 duplicate sources, 11 had nonsignificant redshift differences. For the two sources with significantly different redshifts, one case showed a higher Q value with the latest estimate, while the other had Q=1 for both estimates and would ultimately be removed from the catalog.
+		* extra/2026-10-19.MOO_1142+1527.speczs.internal.groundBasedDups.fits
+			* Made by Delaney White. A table that reports the duplicates that were found between the original internal catalog and her new redshifts. She said that Ireport z_final and Q_final columns that capture the final redshift and Q taken between the duplicates. I also included a column here "DUP_TYPE" that describes if the source would be considered a cluster member (CM) or non-cluster member (NCM) using a velocity dispersion of 10,000 km/s and if the redshift difference was significant (SIG_DIFF) or insignificant (NO_SIG_DIFF) given the >0.01(1+z) criteria Adam shared.
+		* 2026-10-19.MOO_1142+1527.speczs.internal.groundBasedDups.fits
+			* I made this from extra/2026-10-19.MOO_1142+1527.speczs.internal.groundBasedDups.fits and edited the columns to be ready to combine with JWST (e.g., to have an ID column)
 	* JWST
-		* 2026-10-08.MOO_1142+1527.speczs.JWST.fits - list of JWST speczs from the MOO 1142 JWST program led by Yen-Ting Lin. Anthony asked Wren Heiligenstein to send them to me from the paper.
+		* 2026-10-08.MOO_1142+1527.speczs.JWST.csv - list of JWST speczs from the MOO 1142 JWST program led by Yen-Ting Lin. Anthony asked Wren Heiligenstein to send them to me from the paper.
+		* 2026-10-08.MOO_1142+1527.speczs.JWST.fits - is a standardized version of 2026-10-08.MOO_1142+1527.speczs.JWST.csv to prepare for combination with the ground based spectroscopy.
 		* 2026-10-15.MOO_1142+1527.speczs.JWST.grism.lst and 2026-10-15.MOO_1142+1527.speczs.JWST.prism.lst - lists of individual spectra from JWST grism and prism respectively. This has the full quality information for the sources that ended up in 2026-10-08.MOO_1142+1527.speczs.JWST.fits.
 
 2026-10-14: renamed files in this folder so that they were ordered based on date (changed format of file from MOOXXXX.ddMMMYY.fits to YYYY-MM-DD.MOO_1142+1527.fits)
