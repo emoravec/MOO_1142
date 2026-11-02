@@ -270,7 +270,7 @@ def format_shared_pressure_axes(left_axis: plt.Axes, right_axis: plt.Axes) -> No
 		)
 
 	left_axis.set_ylim(1e-7, 1e0)
-	left_axis.set_ylabel("P (keV cm$^{-3}$)")
+	left_axis.set_ylabel("P$_e$ (keV cm$^{-3}$)")
 	left_axis.set_zorder(2)
 	left_axis.patch.set_visible(False)
 	configure_pressure_ticks(left_axis, show_left=True, show_right=False)

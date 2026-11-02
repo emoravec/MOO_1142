@@ -9,7 +9,7 @@ from astropy.coordinates import SkyCoord
 from astropy.table import Table
 from astropy import units as u
 # -------------------------------------------------------------------------------------------- #
-location = Path(__file__).resolve().parent
+location = Path(__file__).resolve().parent.parent
 csv_path = location / '2026-10-15.MOO_1142+1527.speczs.JWST.csv'
 fits_path = location / '2026-10-15.MOO_1142+1527.speczs.JWST.fits'
 

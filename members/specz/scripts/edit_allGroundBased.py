@@ -7,7 +7,7 @@ from astropy.coordinates import SkyCoord
 from astropy.table import Table
 from astropy import units as u
 # -------------------------------------------------------------------------------------------- #
-location = Path(__file__).resolve().parent
+location = Path(__file__).resolve().parent.parent
 name = '2026-10-19.MOO_1142+1527.speczs.internal.groundBasedAll.fits'
 in_path = location / 'extra' / name
 out_path = location / name
@@ -30,3 +30,4 @@ tbl.add_column(ID, name='ID', index=0)
 
 tbl.write(out_path, overwrite=True)
 print(f"Wrote {len(tbl)} rows to {out_path}")
+y
