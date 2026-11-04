@@ -31,6 +31,8 @@ coord = SkyCoord(
 # Use z_grism when present, otherwise z_prism
 use_grism = df['z_grism'].notna().to_numpy()
 specz = np.where(use_grism, df['z_grism'], df['z_prism'])
+specz_err_hi = np.where(use_grism, df['z_grism_err_hi'], df['z_prism_err_hi'])
+specz_err_lo = np.where(use_grism, df['z_grism_err_lo'], df['z_prism_err_lo'])
 source = np.where(use_grism, 'JG', 'JP')
 
 n = len(df)
@@ -39,6 +41,8 @@ tbl['ID'] = ID.to_numpy().astype(str)
 tbl['RA'] = coord.ra.deg
 tbl['Dec'] = coord.dec.deg
 tbl['Spec-z'] = specz.astype(float)
+tbl['Spec-z_err_hi'] = specz_err_hi.astype(float)
+tbl['Spec-z_err_lo'] = specz_err_lo.astype(float)
 tbl['Source'] = source
 tbl['Q'] = np.full(n, 'A/B')
 tbl['Type'] = np.full(n, 'NA')

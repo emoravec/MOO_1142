@@ -1,0 +1,3 @@
+
+* get_BCG.py - uses the coordinates of the BCG ('11:42:47.434 15:27:11.29') to grab the BCG information from the vla21b radio catalog work. Produces MOO_1142_bcg_info.txt. I do not know where those coordinates are from, they are not the coordinates of the FIRST radio source from Ruppin+20 (11:42:47.421 +15:27:11.48) - not the coordinates of the BCG identified by Dakalo bc that BCG is not the radio source. And the spz coordinates of the VLA source are 11:42:47.48, +15:27:11.45, maybe vla (RA: 11:42:47.45 Dec: +15:27:10.94) or LS coords (RA: 11:42:47.43 Dec: +15:27:11.41)?
+* get_MC1_bcg.py - extracts the MOO_1142+1527 row from the MC1 BCG FITS catalog and writes MOO_1142_MC1_BCG.fits.
