@@ -1,5 +1,5 @@
 """
-Edit the ground-based spec-z FITS table: drop 'Cluster' and add an 'ID' column.
+Edit the ground-based spec-z FITS table: add IDs and type-based errors.
 """
 from pathlib import Path
 
@@ -7,16 +7,25 @@ from astropy.coordinates import SkyCoord
 from astropy.table import Table
 from astropy import units as u
 # -------------------------------------------------------------------------------------------- #
-location = Path(__file__).resolve().parent
-name = '2026-10-19.MOO_1142+1527.speczs.internal.groundBasedAll.fits'
-in_path = location / 'extra' / name
-out_path = location / name
+location = Path(__file__).resolve().parent.parent
+in_path = location / 'extra' / '2026-10-19.MOO_1142+1527.speczs.internal.groundBasedAll.fits'
+out_path = location / '2026-11.MOO_1142+1527.speczs.internal.groundBasedAll.fits'
 
 tbl = Table.read(in_path)
 
 for col in ('Cluster', 'Comment'):
     if col in tbl.colnames:
         tbl.remove_column(col)
+
+error_by_type = {'A': 0.003, 'E': 0.0005, 'A+E': 0.0005, 'star': 0.0}
+unknown_types = set(tbl['Type']) - error_by_type.keys()
+if unknown_types:
+    raise ValueError(f"Unknown Type values: {sorted(unknown_types)}")
+
+errors = [error_by_type[value] for value in tbl['Type']]
+specz_index = tbl.colnames.index('Spec-z')
+tbl.add_column(errors, name='Spec-z_err_hi', index=specz_index + 1)
+tbl.add_column(errors, name='Spec-z_err_lo', index=specz_index + 2)
 
 coord = SkyCoord(ra=tbl['RA'], dec=tbl['Dec'], unit=(u.deg, u.deg), frame='icrs')
 RA_hms = coord.ra.to_string(unit=u.hourangle, sep=':', precision=1, pad=True)
