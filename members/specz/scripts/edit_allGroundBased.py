@@ -1,5 +1,5 @@
 """
-Edit the ground-based spec-z FITS table: add IDs and type-based errors.
+Edit the ground-based spec-z FITS table: add IDs and source-dependent errors.
 """
 from pathlib import Path
 
@@ -18,11 +18,23 @@ for col in ('Cluster', 'Comment'):
         tbl.remove_column(col)
 
 error_by_type = {'A': 0.003, 'E': 0.0005, 'A+E': 0.0005, 'star': 0.0}
-unknown_types = set(tbl['Type']) - error_by_type.keys()
+unknown_types = {row['Type'] for row in tbl
+                 if row['Source'] not in ('PN', 'PD')
+                 and row['Type'] not in error_by_type}
 if unknown_types:
     raise ValueError(f"Unknown Type values: {sorted(unknown_types)}")
 
-errors = [error_by_type[value] for value in tbl['Type']]
+errors = []
+for index, row in enumerate(tbl):
+    if row['Source'] in ('PN', 'PD'):
+        if row['Q'] == 3 or (row['Q'] == 2 and row['Type'] in ('E', 'A', 'A+E')):
+            errors.append(0.002)
+        else:
+            print("you have a Palomar source that doesn't fit the standard boiler plate error estimation."
+                  f" Row {index}: Source={row['Source']}, Q={row['Q']}, Type={row['Type']}")
+            errors.append(float('nan'))
+    else:
+        errors.append(error_by_type[row['Type']])
 specz_index = tbl.colnames.index('Spec-z')
 tbl.add_column(errors, name='Spec-z_err_hi', index=specz_index + 1)
 tbl.add_column(errors, name='Spec-z_err_lo', index=specz_index + 2)

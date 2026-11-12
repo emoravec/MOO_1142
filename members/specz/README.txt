@@ -46,14 +46,19 @@
 		* 2026-10-08.MOO_1142+1527.speczs.JWST.fits - is a standardized version of 2026-10-08.MOO_1142+1527.speczs.JWST.csv to prepare for combination with the ground based spectroscopy.
 		* 2026-10-15.MOO_1142+1527.speczs.JWST.grism.lst and 2026-10-15.MOO_1142+1527.speczs.JWST.prism.lst - lists of individual spectra from JWST grism and prism respectively. This has the full quality information for the sources that ended up in 2026-10-08.MOO_1142+1527.speczs.JWST.fits.
 
+2026-10-14: renamed files in this folder so that they were ordered based on date (changed format of file from MOOXXXX.ddMMMYY.fits to YYYY-MM-DD.MOO_1142+1527.fits)
+
 * 2026-11
 	* cross matching ground with JWST - see cross_match_ground_JWST
 		* ground_JWST_1as.fits, ground_JWST_2as.fits, ground_JWST_2p5as.fits - ground and JWST duplicates within 1, 2, and 2.5" (7, 8 and 9 matches).
-	* 2026-11.02.MOO_1142+1527.speczs.all.fits - all ground based + JWST redshifts with duplicates resolved
-
-2026-10-14: renamed files in this folder so that they were ordered based on date (changed format of file from MOOXXXX.ddMMMYY.fits to YYYY-MM-DD.MOO_1142+1527.fits)
-
-Facility codes: ~two letter code that denotes the first letter of the telescope and then the instrument that were used to take the spectrum. 
+		* cross_match_ground_JWST/JWST.Ground_duplicates.fits is the list of the 8 duplicates found between the JWST and ground based programs.
+		* note that in the end the JWST properties were adopted for all 8 duplicates.
+	* 2026-11.MOO_1142+1527.speczs.internal.groundBasedAll.fits - all internal redshifts with the errors from Adam and Daniel added. Also with the galaxy ID column added. Use /scripts/edit_allGroundBased.py to make this fits file.
+	* 2026-11.MOO_1142+1527.speczs.speczs.wide_field_surveys.fits - the 4 speczs from wide-field surveys that Mark found in the MOO 1142 field from the MC1 catalog work
+	* 2026-11.MOO_1142+1527.speczs.allGroundBased.fits - has all internal ground based speczs + the 4 speczs from wide-field surveys that Mark found in the MOO 1142 field from the MC1 catalog work - simple concatenation of 2026-11.MOO_1142+1527.speczs.allGroundBased.fits and 2026-11.MOO_1142+1527.speczs.speczs.wide_field_surveys.fits
+	* 2026-11-12.MOO_1142+1527.speczs.all.fits - all ground based + JWST redshifts with duplicates resolved
+		*  2026-11.MOO_1142+1527.speczs.all.goodQ.fits - 2026-11-12.MOO_1142+1527.speczs.all.fits with the Q == 1 sources removed.
+Facility/Source codes: ~two letter code that denotes the first letter of the telescope and then the instrument that were used to take the spectrum. 
 GN = Gemini North with GMOS
 GO = Gran Telescopio Canarias OSIRIS, 
 JG =  JWST grism
