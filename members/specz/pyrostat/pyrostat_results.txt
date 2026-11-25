@@ -1,0 +1,46 @@
+Got pyrostat results Anthony Gonzalez:
+- All (kept 52 galaxies):
+	- average velocity: 358042.6923076923
+	- median velocity: 357982.0
+	- biweight average velocity : 357869.34547230904 z = 1.1937236442162567
+	- 0.68 confidence interval (gaussian): 220.7464873397658
+	- 0.68 confidence interval (biweight): 220.93548190300172
+		- 357648.409990406 to 358090.28095421207
+		- 1.192986682775075 to 1.194460605657438
+	- 0.68 confidence interval (bootstrap):
+		- 357433.03816574474 to 358359.2821187317
+		- 1.192268279696832 to 1.1953578969579406
+	- Using biweight as location.
+		- gapper scale  : 1543.4335755442607
+		- 0.68 confidence interval (bootstrap):
+			- 1420.2354732362567 to 1732.3215515070508
+		- gaussian velocity dispersion : 1542.2290714517526
+		- 0.68 confidence interval (bootstrap):
+			- 1406.3445588696222 to 1722.6839703937155
+		- biweight velocity dispersion  : 1539.5886610294838
+		- corrected from 1539.5886610294838
+		- 0.68 confidence interval (bootstrap):
+			- 1403.6777487024942 to 1731.2975377198745
+
+- Good (kept 37 galaxies):
+	- average velocity: 357577.02702702704
+	- median velocity: 357383.0
+	- biweight average velocity : 357534.49409392296 z = 1.1926067002456846
+	- 0.68 confidence interval (gaussian): 239.15061349198078
+	- 0.68 confidence interval (biweight): 246.43483418266368
+		- 357288.0592597403 to 357780.9289281056
+		- 1.19178468212079 to 1.193428718370579
+	- 0.68 confidence interval (bootstrap):
+		- 356979.9031572027 to 358083.28972860787
+		- 1.1907567840055626 to 1.1944372854390082
+	- Using biweight as location.
+		- gapper scale: 1439.0539039637722
+		- 0.68 confidence interval (bootstrap):
+			- 1339.9438496891794 to 1628.5964295121603
+		- gaussian velocity dispersion: 1406.5724836480183
+		- 0.68 confidence interval (bootstrap):
+			- 1297.4348206109921 to 1576.242455200279
+		- biweight velocity dispersion: 1444.1417943299289
+		- corrected from 1444.1417943299289
+		- 0.68 confidence interval (bootstrap):
+			- 1325.753307804909 to 1625.195216061949
